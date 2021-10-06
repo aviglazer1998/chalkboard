@@ -3,5 +3,6 @@
 ## This project is a group with Avi Glazer and Miriam Alyeshmerni
 
 
-![alt text](<img width="361" alt="Sitemap - Student" src="https://user-images.githubusercontent.com/51724278/136141000-59bc8928-126e-4966-b02e-a448a32c8f24.png">)
-![alt text](<img width="328" alt="Sitemap - Teacher" src="https://user-images.githubusercontent.com/51724278/136141052-5bf6b01f-3a75-4aff-baf1-9d82d6370669.png">)
+
+<img width="328" alt="Sitemap - Teacher" src="https://user-images.githubusercontent.com/51724278/136141126-eff8ffd7-d597-4e9b-84fa-e8faf8818449.png">
+<img width="361" alt="Sitemap - Student" src="https://user-images.githubusercontent.com/51724278/136141135-5363b1ce-cc68-4589-ad70-d721de28ac86.png">
