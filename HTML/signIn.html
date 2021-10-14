@@ -1,1 +1,30 @@
 <!-- Avi -->
+<!-- https://www.w3schools.com/howto/howto_css_login_form.asp       10/13/2021 -->
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="/CSS/signIn.css" />
+	</head>
+	<body class="page">
+		<form action="action_page.php" method="post">
+			<div class="imgcontainer">
+				<img src="/Images/blankProfilePicture.png" alt="Avatar" class="avatar" />
+			</div>
+
+			<div class="container">
+				<label for="uname"><b>Username</b></label>
+				<input type="text" placeholder="Enter Username" name="uname" required />
+				<br />
+				<label for="passw"><b>Password</b></label>
+				<input type="password" placeholder="Enter Password" name="psw" required />
+				<br />
+				<button class="loginbtn" type="submit">Login</button>
+			</div>
+
+			<div class="container">
+				<button type="button" class="cancelbtn">Cancel</button>
+			</div>
+		</form>
+	</body>
+</html>
