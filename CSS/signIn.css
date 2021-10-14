@@ -37,13 +37,6 @@ button:hover {
 	width: auto;
 }
 
-/* Extra style for the cancel button (red) */
-.cancelbtn {
-	width: auto;
-	padding: 10px 18px;
-	background-color: #f44336;
-}
-
 /* Center the avatar image inside this container */
 .imgcontainer {
 	text-align: center;
@@ -68,13 +61,10 @@ span.psw {
 	padding-top: 16px;
 }
 
-/* Change styles for span and cancel button on extra small screens */
+/* Change styles for span on extra small screens */
 @media screen and (max-width: 300px) {
 	span.psw {
 		display: block;
 		float: none;
-	}
-	.cancelbtn {
-		width: 100%;
 	}
 }
