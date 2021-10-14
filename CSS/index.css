@@ -1,9 +1,9 @@
-img {
-justify-content: center;
-	height: 300px;
-    width: 600px;
+body {
+	text-align: center;
 }
 
-a{
-    text-align: center;
+#banner {
+	width: 70%;
+	height: 405px;
+	background-position: center;
 }
