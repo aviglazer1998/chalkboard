@@ -1,7 +1,18 @@
 .newClass {
 	padding: 10px;
 	border: 2px solid #0476aa;
-	width: auto;
-    list-style: none;
+	width: 200px;
+	height: 200px;
+	list-style: none;
+	display: inline-block;
 }
 
+#banner {
+	width: 70%;
+	height: 405px;
+	background-position: center;
+}
+
+body {
+	text-align: center;
+}
