@@ -1,1 +1,47 @@
 <!-- Miriam -->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Chalkboard Sign Up</title>
+    </head>
+    <body>
+        <header>
+            <img id="banner" src="../Images/chalkboardLogo.png" alt="chalkboard Logo" width = "200px" />
+        </header>
+        <form class = "signup-containter">
+            <div class = "container">
+                <h1>Create an Account</h1>
+                <div class="imgcontainer">
+                    <img src="../Images/blankProfilePicture.png" alt="Avatar" class="avatar" width = "100px"/>
+                </div>
+
+                <div class = "checkboxes">
+                    <input type="checkbox" id="instructor-box">
+                    <label for="instructor-box">Sign up as an instructor</label>
+
+                    <input type="checkbox" id="student-box">
+                    <label for="student-box">Sign up as a student</label>
+                </div>
+
+                <div class ="input">
+                    <label for="first-name">First Name</label>
+                    <input type="text" placeholder="Enter First Name" id="first-name" required>
+                    </br>
+                    <label for="last-name">Last Name</label>
+                    <input type="text" placeholder="Enter Last Name" id="last-name" required>
+                    </br>
+                    <label for="email">Email</label>
+                    <input type="email" placeholder="Enter Email for Username" id="email" required>
+                    </br>
+                    <label for="password">Password</label>
+                    <input type="password" placeholder="Enter New Password" id="password" required>
+                    </br>
+
+                    <button class="signupbtn" type="submit">Sign Up</button>
+                    <div>Now go <a href="../index.html">sign in!</a></div>
+                </div>
+            </div>
+        </form>
+    </body>
+</html>
