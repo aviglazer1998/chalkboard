@@ -1,0 +1,45 @@
+/* https://www.w3schools.com/howto/howto_css_login_form.asp       10/13/2021 */
+
+body {
+	text-align: center;
+}
+
+#banner {
+	width: 70%;
+	height: 405px;
+	background-position: center;
+}
+
+@media screen and (max-height: 800px) {
+	#banner {
+		height: 300px;
+		width: 300px;
+	}
+}
+
+@media screen and (max-height: 675px) {
+	#banner {
+		height: 200px;
+		width: 200px;
+	}
+}
+
+@media screen and (max-height: 600px) {
+	#banner {
+		height: 100px;
+		width: 100px;
+	}
+}
+
+@media screen and (max-height: 500px) {
+	#banner {
+		height: 50px;
+		width: 50px;
+	}
+}
+
+@media screen and (max-height: 450px) {
+	#banner {
+		display: none;
+	}
+}
