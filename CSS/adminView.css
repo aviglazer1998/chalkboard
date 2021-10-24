@@ -1,0 +1,25 @@
+body {
+	text-align: center;
+}
+#banner {
+	width: 70%;
+	height: 405px;
+	background-position: center;
+}
+
+
+table,
+th,
+td {
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+table {
+	width: 100%;
+}
+
+th {
+	background-color: gray;
+	color: aliceblue;
+}
