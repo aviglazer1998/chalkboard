@@ -1,5 +1,21 @@
-.div1 {
+#banner {
+	width: 70%;
+	height: 405px;
+	background-position: center;
+}
+
+body {
+	text-align: center;
+}
+
+.textbox {
 	width: 100px;
 	height: 50px;
-	border: 1px solid bblack;
+	border: 1px solid black;
+}
+
+ol {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
 }
