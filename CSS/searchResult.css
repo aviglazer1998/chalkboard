@@ -1,0 +1,15 @@
+#banner {
+    display: block;
+    margin: auto;
+	width: 500px;
+	height: 405px;
+	background-position: center;
+}
+.header {
+    display: block;
+    text-align: center;
+}
+.instructor-waitlist {
+    padding: 5px;
+    margin: 7px;
+}

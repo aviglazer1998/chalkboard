@@ -1,2 +1,158 @@
 <!-- Miriam -->
 
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="../CSS/coursePageInstructor.css" />
+        <title>Instructor Course Page</title>
+    </head>
+    <body>
+        
+        <img id="banner" src="../Images/chalkboardLogo.png" alt="chalkboard Logo" />
+        <div class="header">    
+            <h1>Course Name</h1>
+            <p>Course ID</p>
+        </div>
+        <hr>
+
+        <div class="intructors">
+            <input type="button" class="instructor-waitlist" value="Remove" id="teacher-1">
+            <label for="teacher-1">Teacher 1</label>
+            </br>
+            <input type="button" class="instructor-waitlist" value="Remove" id="teacher-2">
+            <label for="teacher-2">Teacher 2</label>
+            </br>
+            <input type="button" class="instructor-waitlist" value="Remove" id="teacher-3">
+            <label for="teacher-3">Teacher 3</label>
+            </br>
+            <input type="button" class="instructor-waitlist" value="Add New Instructor" id="teacher-3">
+        </div>
+        <hr>
+
+        <div class="pending-roster">
+            <h2>Student Waitlist</h2>
+            <input type="button" class="student-waitlist" value="Add Student" id="student-1">
+            <label for="student-1">John Doe</label>
+            </br>
+            <input type="button" class="student-waitlist" value="Add Student" id="student-2">
+            <label for="student-2">Sam Beeker</label>
+            </br>
+            <input type="button" class="student-waitlist" value="Add Student" id="student-3">
+            <label for="student-3">Hanna Ali</label>
+            </br>
+        </div>
+        <hr>
+
+        <div class="roster">
+            <h2>Roster</h2>
+            <ul class="student-names">
+                <li>student name</li>
+                <li>student name</li>
+                <li>student name</li>
+                <li>student name</li>
+                <li>student name</li>
+                <li>student name</li>
+            </ul>
+        </div>
+        <hr>
+
+        <div class="description">
+            <h2>Course Description</h2>
+
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facilis, 
+                    impedit labore. Quidem ea aliquid fuga voluptas, doloribus impedit 
+                    inventore consectetur neque ut nihil labore iste, voluptatem doloremque, 
+                    commodi tempora quos.
+                </p>
+        </div>
+        <hr>
+
+        <div class="container hw-assignments">
+            <h2>Assignments</h2>
+            <ul>
+                <li>
+                    <div class="row assignment">
+                        <a href="/HTML/AssignmentPage.html"> 
+                            <div class="col">
+                                Assignment 1
+                            </div>
+                        </a>
+                        <a href="/HTML/AssignmentPage.html">
+                            <div class="col">
+                                Answer Key
+                            </div>
+                        </a>
+                    </div>
+                    <ul>
+                        <li>
+                            <div class="row">
+                                <div class="col">
+                                    Grade Sheet 
+                                    <!-- make into a link to go to some kind of grading thing -->
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="row">
+                                <div class="col">
+                                    To Grade
+                                    <!-- some way to see which assignments aren't graded yet? -->
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="row assignment">
+                        <a href="/HTML/AssignmentPage.html"> 
+                            <div class="col">
+                                Assignment 2
+                            </div>
+                        </a>
+                        <a href="/HTML/AssignmentPage.html">
+                            <div class="col">
+                                Answer Key
+                            </div>
+                        </a>
+                    </div>
+                    <ul>
+                        <li>
+                            <div class="row">
+                                <div class="col">
+                                    Grade Sheet 
+                                    <!-- make into a link to go to some kind of grading thing -->
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="row">
+                                <div class="col">
+                                    To Grade
+                                    <!-- some way to see which assignments aren't graded yet? -->
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+           
+        </div>
+        <hr>
+
+        <div class="container materials">
+            <h2>Course Materials</h2>
+            <ul>
+                <li>Syllabus</li>
+                <li>Textbook link</li>
+                <li>Notes from Instructor</li>
+                <li>Documents posted</li>
+                <li><a href="/HTML/recordings.html">Recordings</a></li>
+            </ul>
+        </div>
+        <hr>
+
+        <div class="delete-btn">
+            <input type="button" value="Delete Class">
+        </div>
+    </body>
+</html>

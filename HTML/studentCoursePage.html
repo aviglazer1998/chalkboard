@@ -3,31 +3,36 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" href="../CSS/studentCoursePage.css" />
         <title>Student Course Page</title>
     </head>
     <body>
-        <header>
+        <img id="banner" src="../Images/chalkboardLogo.png" alt="chalkboard Logo" />
+        <div class="header">
             <h1>Course Name</h1>
             <p>Instructor Name</p>
-        </header>
+        </div>
         <hr>
 
         <div class="container recordings">
-            <h2>Class Recordings</h2>
+            <div>
+                <h2>Class Recordings</h2>
+            </div>
+            </br>
             
-            <div class = "class1-vid">
+            <div class="vid" id = "class1-vid">
                 <video width = "200" height = "150" style="display:inline-flex" controls>
                     <source src="../Videos/videoplayback.mp4" type="video/mp4">
                 </video>
                 <b>Class 1:</b> recorded class topics
             </div>
-            <div class = "class2-vid">
+            <div class="vid" id = "class2-vid">
                 <video width = "200" height = "150" style="display:inline-flex" controls>
                     <source src="../Videos/videoplayback.mp4" type="video/mp4">
                 </video>
                 <b>Class 2:</b> recorded class topics
             </div>
-            <div class = "class1-vid">
+            <div class="vid" id = "class1-vid">
                 <video width = "200" height = "150" style="display:inline-flex" controls>
                     <source src="../Videos/videoplayback.mp4" type="video/mp4">
                 </video>
@@ -50,7 +55,38 @@
 
         <div class="container hw-assignments">
             <h2>Homework Assignments</h2>
-
+            <ul>
+                <li>
+                    <div class="row">
+                        <div class="col">
+                            Assignment 1
+                        </div>
+                        <div class="col grade">
+                            grade%
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row">
+                        <div class="col">
+                            Assignment 2
+                        </div>
+                        <div class="col grade">
+                            grade%
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row">
+                        <div class="col">
+                            Assignment 3
+                        </div>
+                        <div class="col grade">
+                            grade%
+                        </div>
+                    </div>
+                </li>
+            </ul>
         </div>
 
     </body>
