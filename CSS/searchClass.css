@@ -3,6 +3,13 @@ header {
 	border: 1px solid black;
 	font-size: 102px;
 }
+#banner {
+	display: block;
+	margin: auto;
+	width: 70%;
+	height: 405px;
+	background-position: center;
+}
 
 .searchbtn {
 	background-color: #0476aa;
@@ -10,6 +17,7 @@ header {
 	padding: 10px 20px;
 	margin: 10px 0px;
 	cursor: pointer;
+	text-decoration: none;
 }
 
 .searchbtn:hover {
