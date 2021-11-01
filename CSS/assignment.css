@@ -1,16 +1,7 @@
-/* #banner {
-    display: block;
-    margin: auto;
-	width: 500px;
-	height: 405px;
-	background-position: center;
-} */
-
 #logo{
     height: 70px;
     width: 70px;
 } 
-
 .topnav {
     overflow: hidden;
     margin-bottom: 0;
@@ -28,12 +19,20 @@
     background-color: #ddd;
     color: black;
 }
-
-.header {
-    display: block;
+h1 {
     text-align: center;
 }
-.instructor-waitlist {
-    padding: 5px;
-    margin: 7px;
+.question {
+    padding: 10px;
 }
+.question input{
+    margin: 10px;
+}
+/* .footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.footer button{
+    margin: 10px;
+} */
