@@ -1,11 +1,7 @@
 /* https://www.w3schools.com/css/tryit.asp?filename=trycss_dropdown_button      10/18/2021*/
 
 .newClass {
-	padding: 10px;
-	width: 200px;
-	height: 200px;
 	list-style: none;
-	display: inline-block;
 }
 
 #banner {
@@ -64,4 +60,26 @@ button > a {
 .dropdown:hover .dropbtn {
 	opacity: 0.6;
 	text-decoration: underline;
+}
+
+@media screen and (max-height: 600px) {
+	#banner {
+		height: 200px;
+	}
+
+	.class-content {
+		font-size: 2pt;
+		display: inline-block;
+		word-wrap: break-word;
+		width: 100px;
+		height: 100px;
+	}
+}
+
+@media screen and (min-height: 600px) {
+	.class-content {
+		width: 150px;
+		height: 150px;
+		display: inline-block;
+	}
 }
