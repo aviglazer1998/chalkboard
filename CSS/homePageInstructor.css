@@ -5,9 +5,20 @@
 }
 
 #banner {
-	width: 70%;
-	height: 405px;
+	display: block;
+	margin: auto;
+	height: 70px;
+	width: 70px;
 	background-position: center;
+	float: left;
+}
+
+li {
+	padding-right: 40px;
+}
+.active:hover {
+	background-color: #ddd;
+	float: left;
 }
 
 body {
@@ -17,6 +28,7 @@ body {
 button > a {
 	text-decoration: none;
 	color: white;
+	text-align: center;
 }
 
 .dropbtn {
