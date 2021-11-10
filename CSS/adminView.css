@@ -2,11 +2,18 @@ body {
 	text-align: center;
 }
 #banner {
-	width: 70%;
-	height: 405px;
+	display: block;
+	margin: auto;
+	height: 70px;
+	width: 70px;
 	background-position: center;
+	float: left;
 }
 
+.active:hover {
+	background-color: #ddd;
+	float: left;
+}
 
 table,
 th,
