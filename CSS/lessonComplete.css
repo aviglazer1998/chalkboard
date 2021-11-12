@@ -1,7 +1,15 @@
 #banner {
-	width: 70%;
-	height: 405px;
+	display: block;
+	margin: auto;
+	height: 100px;
+	width: 100px;
 	background-position: center;
+	float: left;
+}
+
+a:hover {
+	background-color: #ddd;
+	float: left;
 }
 
 body {

@@ -3,12 +3,22 @@ header {
 	border: 1px solid black;
 	font-size: 102px;
 }
+body {
+	text-align: center;
+}
+
 #banner {
 	display: block;
 	margin: auto;
-	width: 70%;
-	height: 405px;
+	height: 70px;
+	width: 70px;
 	background-position: center;
+	float: left;
+}
+
+a:hover {
+	background-color: #ddd;
+	float: left;
 }
 
 .searchbtn {

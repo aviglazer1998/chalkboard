@@ -5,9 +5,17 @@ body {
 }
 
 #banner {
-	width: 70%;
-	height: 405px;
+	display: block;
+	margin: auto;
+	height: 70px;
+	width: 70px;
 	background-position: center;
+	float: left;
+}
+
+.active:hover {
+	background-color: #ddd;
+	float: left;
 }
 
 table,
@@ -26,26 +34,24 @@ th {
 	color: aliceblue;
 }
 
-.nav {
-	border: 1px solid #ccc;
+.nav li {
+	border: 1px 1px solid black;
 	border-width: 1px 0;
 	list-style: none;
 	margin: 0;
 	padding: 0;
 	text-align: center;
-	background-color: #333;
-}
-.nav li {
 	display: inline;
 }
+
 .nav a {
 	display: inline-block;
 	padding: 10px;
-	color: white;
+	color: black;
 }
 
 li a:hover {
-	background-color: #111;
+	background-color: gray;
 }
 
 @media screen and (max-height: 800px) {
