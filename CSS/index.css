@@ -1,7 +1,8 @@
 /* https://www.w3schools.com/howto/howto_css_login_form.asp       10/13/2021*/
 
 * {
-  font-family: "Cabin", sans-serif;
+  font-family: 'Cabin', sans-serif;
+  color: rgb(100, 99, 99);
 }
 #logo {
   height: 70px;
@@ -14,24 +15,9 @@
 header {
   text-align: center;
 }
-.topnav {
-  overflow: hidden;
-  margin-bottom: 0;
-}
-
-.topnav a {
-  float: left;
-  text-align: center;
-  padding: 14px 16px;
-  font-size: 17px;
-}
-
-.topnav a:hover {
-  background-color: #ddd;
-  color: black;
-}
 h1 {
   text-align: center;
+  color: rgb(100, 99, 99);
 }
 
 .page {
@@ -92,19 +78,19 @@ button:hover {
 }
 
 hr {
-  border: 1px solid black;
+  border: 1px solid rgb(100, 99, 99);
   width: 85%;
 }
 .vertical {
-  color: black;
+  color: rgb(100, 99, 99);
 }
 .verticalLine {
-  border-left: 2px solid black;
+  border-left: 2px solid rgb(100, 99, 99);
 }
 
 a {
   text-decoration: none;
-  color: black;
+  color: rgb(100, 99, 99);
 }
 
 @media screen and (max-width: 780px) {

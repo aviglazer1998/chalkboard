@@ -4,6 +4,8 @@
 <html>
 	<head>
 		<link rel="stylesheet" href="../CSS/coursePageInstructor.css" />
+		<link href="https://fonts.googleapis.com/css2?family=Cabin:ital@0;1&display=swap" rel="stylesheet">
+
 		<title>Instructor Course Page</title>
 	</head>
 	<body>
@@ -28,33 +30,41 @@
 
 		<div class="container instructors">
 			<h2>Instructors</h2>
-			<input type="button" class="instructor-waitlist" value="Remove" id="teacher-1" />
-			<label for="teacher-1">Teacher 1</label>
-			<br />
-			<input type="button" class="instructor-waitlist" value="Remove" id="teacher-2" />
-			<label for="teacher-2">Teacher 2</label>
-			<br />
-			<input type="button" class="instructor-waitlist" value="Remove" id="teacher-3" />
-			<label for="teacher-3">Teacher 3</label>
-			<br />
-			<input type="button" class="instructor-waitlist" value="Add New Instructor" id="teacher-3" />
+			<div class="buttons">
+				<input type="button" class="instructor-waitlist" value="Remove" id="teacher-1" />
+				<label for="teacher-1">Teacher 1</label>
+				<br />
+				<input type="button" class="instructor-waitlist" value="Remove" id="teacher-2" />
+				<label for="teacher-2">Teacher 2</label>
+				<br />
+				<input type="button" class="instructor-waitlist" value="Remove" id="teacher-3" />
+				<label for="teacher-3">Teacher 3</label>
+				<br />
+				<input type="button" class="instructor-waitlist" value="Add New Instructor" id="teacher-3" />
+			</div>
+			
 		</div>
+		<hr />
 
 		<div class="pending-roster container" id="waitlist">
 			<h2>Student Waitlist</h2>
-			<input type="button" class="student-waitlist check" value="&#10003" id="student-1" />
-			<input type="button" class="student-waitlist x" value="&times" id="student-1" />
-			<label for="student-1">John Doe</label>
-			<br />
-			<input type="button" class="student-waitlist check" value="&#10003" id="student-2" />
-			<input type="button" class="student-waitlist x" value="&times" id="student-2" />
-			<label for="student-2">Sam Beeker</label>
-			<br />
-			<input type="button" class="student-waitlist check" value="&#10003" id="student-3" />
-			<input type="button" class="student-waitlist x" value="&times" id="student-3" />
-			<label for="student-3">Hanna Ali</label>
-			<br />
+			<div class="buttons">
+				<input type="button" class="student-waitlist check" value="&#10003" id="student-1" />
+				<input type="button" class="student-waitlist x" value="&times" id="student-1" />
+				<label for="student-1">John Doe</label>
+				<br />
+				<input type="button" class="student-waitlist check" value="&#10003" id="student-2" />
+				<input type="button" class="student-waitlist x" value="&times" id="student-2" />
+				<label for="student-2">Sam Beeker</label>
+				<br />
+				<input type="button" class="student-waitlist check" value="&#10003" id="student-3" />
+				<input type="button" class="student-waitlist x" value="&times" id="student-3" />
+				<label for="student-3">Hanna Ali</label>
+				<br />
+			</div>
+			
 		</div>
+		<hr />
 
 		<div class="container" id="description">
 			<h2>Course Description</h2>
@@ -64,6 +74,7 @@
 				doloribus impedit inventore consectetur neque ut nihil labore iste, voluptatem doloremque, commodi tempora quos.
 			</p>
 		</div>
+		<hr />
 
 		<div class="container hw-assignments" id="assignment">
 			<h2>Assignments</h2>
@@ -124,6 +135,7 @@
 				</li>
 			</ul>
 		</div>
+		<hr />
 
 		<div class="container materials" id="materials">
 			<h2>Course Materials</h2>

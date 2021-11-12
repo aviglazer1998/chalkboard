@@ -1,56 +1,76 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel="stylesheet" href="../CSS/recordings.css" />
-        <title>Course Recordings</title>
-    </head>
-    <body>
-        <header>
-            <!-- <a href="./homePageStudent.html">
-                <img id="banner" src="../Images/chalkboardLogo.png" alt="chalkboard Logo" />
-            </a> -->
-            <div class="topnav">
-				<a class="active" href="/HTML/homePageStudent.html">
-					<img id="logo" src="../Images/chalkboard-logo.png" alt="chalkboard Logo" />
-				</a>
-				<!-- <a href="#waitlist">Waitlist</a>
-				<a href="#description">Description</a>
-				<a href="#assignment">Assignments</a>
-				<a href="#materials">Course Materials</a> -->
-			</div>
-            <h1>Course Name</h1>
-            <p>Course ID</p>
-            <style>
-                #banner {
-                    display: block;
-                    margin: auto;
-	                width: 500px;
-	                height: 405px;
-	                background-position: center;
-                }
-            </style>
-        </header>
-        <div class="container recordings">
-            <h2>Class Recordings</h2>
-            
-            <div class = "class1-vid">
-                <video width = "200" height = "150" style="display:inline-flex" controls>
-                    <source src="../Videos/videoplayback.mp4" type="video/mp4">
-                </video>
-                <b>Class 1:</b> recorded class topics
-            </div>
-            <div class = "class2-vid">
-                <video width = "200" height = "150" style="display:inline-flex" controls>
-                    <source src="../Videos/videoplayback.mp4" type="video/mp4">
-                </video>
-                <b>Class 2:</b> recorded class topics
-            </div>
-            <div class = "class1-vid">
-                <video width = "200" height = "150" style="display:inline-flex" controls>
-                    <source src="../Videos/videoplayback.mp4" type="video/mp4">
-                </video>
-                <b>Class 3:</b> recorded class topics
-            </div>
+  <head>
+    <link
+      rel="stylesheet"
+      href="../CSS/recordings.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cabin:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>Course Recordings</title>
+  </head>
+  <body>
+    <header>
+      <div class="topnav">
+        <a
+          class="active"
+          href="/HTML/homePageStudent.html"
+        >
+          <img
+            id="logo"
+            src="../Images/chalkboard-logo.png"
+            alt="chalkboard Logo"
+          />
+        </a>
+      </div>
+      <h1>Course Name</h1>
+      <p>Course ID</p>
+    </header>
+    <br />
+    <hr />
+    <div class="container recordings">
+      <h1>Class Recordings</h1>
+      <div class="videos">
+        <div class="vid">
+          <video controls>
+            <source
+              src="../Videos/videoplayback.mp4"
+              type="video/mp4"
+            />
+          </video>
+          <div class="vid-info">
+            <b>Class 1:</b> recorded
+            class topics
+          </div>
         </div>
-    </body>
+        <div class="vid">
+          <video controls>
+            <source
+              src="../Videos/videoplayback.mp4"
+              type="video/mp4"
+            />
+          </video>
+          <div class="vid-info">
+            <b>Class 2:</b> recorded
+            class topics
+          </div>
+        </div>
+        <div class="vid">
+          <video controls>
+            <source
+              src="../Videos/videoplayback.mp4"
+              type="video/mp4"
+            />
+          </video>
+          <div class="vid-info">
+            <b>Class 3:</b> recorded
+            class topics
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
