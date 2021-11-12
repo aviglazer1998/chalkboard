@@ -1,11 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
 		<title>Create Course</title>
-		<link rel="stylesheet" href="../CSS/lessonComplete.css" />
+		<link rel="stylesheet" href="../CSS/createCourse.css" />
 	</head>
 	<body>
-		<img id="banner" src="../Images/chalkboardLogo.png" alt="chalkboard Logo" />
+		<a class="active" href="/HTML/homePageInstructor.html">
+			<img id="banner" src="../Images/chalkboard-logo.png" alt="chalkboard Logo" />
+		</a>
+		<br />
+		<br>
 		<form>
 			<h1>Create new class:</h1>
 			<br />
@@ -20,7 +24,8 @@
 			<label for="endTime">End time:</label>
 			<input type="time" id="endTime" name="endTime" />
 
-			<h5>(Hold CTRL to select multiple days.)</5><br>
+			<h5>(Hold CTRL to select multiple days.)</h5>
+			<br />
 			<label for="frequency">Frequency:</label>
 			<select id="frequency" name="frequency" multiple size="7">
 				<option value="sunday">Sunday</option>
@@ -29,11 +34,11 @@
 				<option value="wednesday">Wednesday</option>
 				<option value="thursday">Thursday</option>
 				<option value="friday">Friday</option>
-				<option value="saturday">Saturday</option>
-			</select><br>
+				<option value="saturday">Saturday</option></select
+			><br />
 
-				<label for="description">Description:</label>
-				<input type="text" id="description" name="description" /><br />
+			<label for="description">Description:</label>
+			<input type="text" id="description" name="description" /><br />
 			<button class="searchbtn">Add class</button>
 		</form>
 	</body>
