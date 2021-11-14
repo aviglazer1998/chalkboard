@@ -1,45 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title>Create Course</title>
-		<link rel="stylesheet" href="../CSS/createCourse.css" />
-	</head>
-	<body>
-		<a class="active" href="/HTML/homePageInstructor.html">
-			<img id="banner" src="../Images/chalkboard-logo.png" alt="chalkboard Logo" />
-		</a>
-		<br />
-		<br>
-		<form>
-			<h1>Create new class:</h1>
-			<br />
-			<label for="className">Class name:</label>
-			<input type="text" id="className" name="className" /><br />
-			<label for="startDate">Start date:</label>
-			<input type="date" id="startDate" name="startDate" /><br />
-			<label for="endDate">End date:</label>
-			<input type="date" id="endDate" name="endDate" /><br />
-			<label for="startTime">Start time:</label>
-			<input type="time" id="startTime" name="startTime" /><br />
-			<label for="endTime">End time:</label>
-			<input type="time" id="endTime" name="endTime" />
+  <head>
+    <title>Create Course</title>
+    <link rel="stylesheet" href="../CSS/createCourse.css" />
+  </head>
+  <body>
+    <a class="active" href="./homePageInstructor.html">
+      <img
+        id="banner"
+        src="../Images/chalkboard-logo.png"
+        alt="chalkboard Logo"
+      />
+    </a>
+    <br />
+    <br />
+    <form>
+      <h1>Create new class:</h1>
+      <br />
+      <label for="className">Class name:</label>
+      <input type="text" id="className" name="className" /><br />
+      <label for="startDate">Start date:</label>
+      <input type="date" id="startDate" name="startDate" /><br />
+      <label for="endDate">End date:</label>
+      <input type="date" id="endDate" name="endDate" /><br />
+      <label for="startTime">Start time:</label>
+      <input type="time" id="startTime" name="startTime" /><br />
+      <label for="endTime">End time:</label>
+      <input type="time" id="endTime" name="endTime" />
 
-			<h5>(Hold CTRL to select multiple days.)</h5>
-			<br />
-			<label for="frequency">Frequency:</label>
-			<select id="frequency" name="frequency" multiple size="7">
-				<option value="sunday">Sunday</option>
-				<option value="monday">Monday</option>
-				<option value="tuesday">Tuesday</option>
-				<option value="wednesday">Wednesday</option>
-				<option value="thursday">Thursday</option>
-				<option value="friday">Friday</option>
-				<option value="saturday">Saturday</option></select
-			><br />
+      <h5>(Hold CTRL to select multiple days.)</h5>
+      <br />
+      <label for="frequency">Frequency:</label>
+      <select id="frequency" name="frequency" multiple size="7">
+        <option value="sunday">Sunday</option>
+        <option value="monday">Monday</option>
+        <option value="tuesday">Tuesday</option>
+        <option value="wednesday">Wednesday</option>
+        <option value="thursday">Thursday</option>
+        <option value="friday">Friday</option>
+        <option value="saturday">Saturday</option></select
+      ><br />
 
-			<label for="description">Description:</label>
-			<input type="text" id="description" name="description" /><br />
-			<button class="searchbtn">Add class</button>
-		</form>
-	</body>
+      <label for="description">Description:</label>
+      <input type="text" id="description" name="description" /><br />
+      <button class="searchbtn">Add class</button>
+    </form>
+  </body>
 </html>
