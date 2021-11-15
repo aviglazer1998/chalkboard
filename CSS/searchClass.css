@@ -6,9 +6,10 @@ header {
 #banner {
 	display: block;
 	margin: auto;
-	width: 70%;
-	height: 405px;
+	height: 70px;
+	width: 70px;
 	background-position: center;
+	float: left;
 }
 
 .searchbtn {
