@@ -6,9 +6,10 @@ header {
 #banner {
 	display: block;
 	margin: auto;
-	width: 70%;
-	height: 405px;
+	height: 70px;
+	width: 70px;
 	background-position: center;
+	float: left;
 }
 
 .searchbtn {
@@ -32,6 +33,20 @@ input {
 
 label {
 	font-size: 35px;
+}
+
+a {
+	float: left;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-size: 17px;
+	color: rgb(100, 99, 99);
+}
+
+a:hover {
+	background-color: #ddd;
+	color: black;
 }
 
 @media screen and (max-height: 800px) {

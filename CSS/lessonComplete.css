@@ -34,3 +34,22 @@ button {
 	border: none;
 	cursor: pointer;
 }
+
+
+.topnav {
+	overflow: hidden;
+	margin-bottom: 0;
+}
+
+a {
+	float: left;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-size: 17px;
+	color: rgb(100, 99, 99);
+}
+a:hover {
+	background-color: #ddd;
+	color: black;
+}

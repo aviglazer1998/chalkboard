@@ -4,6 +4,21 @@ body {
 	text-align: center;
 }
 
+  
+  a {
+	float: left;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-size: 17px;
+	color: rgb(100, 99, 99);
+  }
+  
+  a:hover {
+	background-color: #ddd;
+	color: black;
+  }
+
 #banner {
 	display: block;
 	margin: auto;
@@ -35,8 +50,6 @@ th {
 }
 
 .nav li {
-	border: 1px 1px solid black;
-	border-width: 1px 0;
 	list-style: none;
 	margin: 0;
 	padding: 0;
@@ -52,38 +65,4 @@ th {
 
 li a:hover {
 	background-color: gray;
-}
-
-@media screen and (max-height: 800px) {
-	#banner {
-		height: 300px;
-		width: 300px;
-	}
-}
-
-@media screen and (max-height: 675px) {
-	#banner {
-		height: 200px;
-		width: 200px;
-	}
-}
-
-@media screen and (max-height: 600px) {
-	#banner {
-		height: 100px;
-		width: 100px;
-	}
-}
-
-@media screen and (max-height: 500px) {
-	#banner {
-		height: 50px;
-		width: 50px;
-	}
-}
-
-@media screen and (max-height: 450px) {
-	#banner {
-		display: none;
-	}
 }
