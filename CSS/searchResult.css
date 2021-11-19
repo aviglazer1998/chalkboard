@@ -86,10 +86,14 @@ input[type='button']:hover {
     width: 100px;
     font-size: 12px;
     display: flex;
+    justify-content: center;
   }
   .instructor-btn {
     display: flex;
     align-items: center;
     text-align: center;
+  }
+  input.lessons-btn {
+    font-size: 10px;
   }
 }
