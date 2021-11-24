@@ -2,126 +2,86 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Chalkboard Sign Up</title>
-    <link rel="stylesheet" href="CSS/index.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cabin:ital@0;1&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <header>
-      <img id="logo" src="Images/chalkboard-logo.png" alt="chalkboard Logo" />
-      <h2>Some Line About Remote Learning and How Great it is</h2>
-      <hr />
-    </header>
-    <div class="page">
-      <form class="signin-container">
-        <div class="container input">
-          <h3>Sign in to your account</h3>
-          <label for="uname">Email Address</label>
-          <br />
-          <input type="text" placeholder="Enter Email" name="uname" required />
-          <br />
-          <label for="passw">Password</label>
-          <br />
-          <input
-            type="password"
-            placeholder="Enter Password"
-            name="psw"
-            required
-          />
-          <br />
-          <button
-            class="loginbtn"
-            type="submit"
-            onclick="location.href='./HTML/homePageInstructor.html'"
-          >
-            <!-- <a href="./HTML/homePageInstructor.html">Instructor Login</a> -->
-            Instructor Login
-          </button>
-          <br />
-          <button
-            class="loginbtn"
-            type="submit"
-            onclick="location.href='./HTML/homePageStudent.html'"
-          >
-            <!-- <a href="./HTML/homePageStudent.html">Student Login</a> -->
-            Student Login
-          </button>
-          <br />
-          <button
-            class="loginbtn"
-            type="submit"
-            onclick="location.href='./HTML/adminView.html'"
-          >
-            <!-- <a href="./HTML/adminView.html">Admin Login</a> -->
-            Admin Login
-          </button>
-        </div>
-      </form>
+	<head>
+		<title>Chalkboard Sign Up</title>
+		<link rel="stylesheet" href="CSS/index.css" />
+		<link href="https://fonts.googleapis.com/css2?family=Cabin:ital@0;1&display=swap" rel="stylesheet" />
+	</head>
+	<body>
+		<header>
+			<img id="logo" src="Images/chalkboard-logo.png" alt="chalkboard Logo" />
+			<h2>Some Line About Remote Learning and How Great it is</h2>
+			<hr />
+		</header>
+		<div class="page">
+			<form class="signin-container">
+				<div class="container input">
+					<h3>Sign in to your account</h3>
+					<label for="uname">Email Address</label>
+					<br />
+					<input type="text" placeholder="Enter Email" name="uname" id="uname" required />
+					<br />
+					<label for="passw">Password</label>
+					<br />
+					<input type="password" placeholder="Enter Password" name="psw" id="passw" required />
+					<br />
+					<button class="loginbtn" type="submit" onclick="location.href='./HTML/homePageInstructor.html'">
+						<!-- <a href="./HTML/homePageInstructor.html">Instructor Login</a> -->
+						Instructor Login
+					</button>
+					<br />
+					<button class="loginbtn" type="submit" onclick="location.href='./HTML/homePageStudent.html'">
+						<!-- <a href="./HTML/homePageStudent.html">Student Login</a> -->
+						Student Login
+					</button>
+					<br />
+					<button class="loginbtn" type="submit" onclick="location.href='./HTML/adminView.html'">
+						<!-- <a href="./HTML/adminView.html">Admin Login</a> -->
+						Admin Login
+					</button>
+				</div>
+			</form>
 
-      <div class="verticalLine"></div>
+			<div class="verticalLine"></div>
 
-      <form class="signup-container">
-        <div class="container">
-          <h3>Create an account</h3>
+			<form class="signup-container">
+				<div class="container">
+					<h3>Create an account</h3>
 
-          <div class="checkboxes">
-            <div class="check">
-              <input type="checkbox" id="student-box" />
-              <label for="student-box">Sign up as a student</label>
-            </div>
+					<div class="checkboxes">
+						<div class="check">
+							<input type="checkbox" id="student-box" />
+							<label for="student-box">Sign up as a student</label>
+						</div>
 
-            <!-- </br> -->
-            <div class="check">
-              <input type="checkbox" id="instructor-box" />
-              <label for="instructor-box">Sign up as an instructor</label>
-            </div>
-          </div>
+						<!-- </br> -->
+						<div class="check">
+							<input type="checkbox" id="instructor-box" />
+							<label for="instructor-box">Sign up as an instructor</label>
+						</div>
+					</div>
 
-          <div class="input">
-            <label for="first-name">First Name</label>
-            <br />
-            <input
-              type="text"
-              placeholder="Enter First Name"
-              id="first-name"
-              required
-            />
-            <br />
-            <label for="last-name">Last Name</label>
-            <br />
-            <input
-              type="text"
-              placeholder="Enter Last Name"
-              id="last-name"
-              required
-            />
-            <br />
-            <label for="email">Email Address</label>
-            <br />
-            <input
-              type="email"
-              placeholder="Enter Email for Username"
-              id="email"
-              required
-            />
-            <br />
-            <label for="password">Password</label>
-            <br />
-            <input
-              type="password"
-              placeholder="Enter New Password"
-              id="password"
-              required
-            />
-            <br />
-            <button class="signupbtn" type="submit">Sign Up</button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </body>
+					<div class="input">
+						<label for="first-name">First Name</label>
+						<br />
+						<input type="text" placeholder="Enter First Name" id="first-name" required />
+						<br />
+						<label for="last-name">Last Name</label>
+						<br />
+						<input type="text" placeholder="Enter Last Name" id="last-name" required />
+						<br />
+						<label for="email">Email Address</label>
+						<br />
+						<input type="email" placeholder="Enter Email for Username" id="email" required />
+						<br />
+						<label for="password">Password</label>
+						<br />
+						<input type="password" placeholder="Enter New Password" id="password" required />
+						<br />
+						<button class="signupbtn" type="submit">Sign Up</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</body>
 </html>
