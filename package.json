@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/aviglazer1998/chalkboard#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mongodb": "^4.2.0"
   }
 }
