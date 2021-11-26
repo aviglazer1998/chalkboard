@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const PORT = process.env.PORT || 3000;
 const app = express();
+const uri = process.env.MONGODB_URI;
 
 app.use(bodyParser.json());
 // Express modules / packages
