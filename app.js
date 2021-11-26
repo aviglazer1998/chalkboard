@@ -5,7 +5,6 @@ const express = require("express");
 const path = require("path");
 const app = express();
 const PORT = process.env.PORT || 3000;
-const routes = require("./routes/api");
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -25,13 +24,11 @@ app.use(bodyParser.json());
 // Express modules / packages
 
 app.use(bodyParser.urlencoded({ extended: true }));
-// Express modules / packages
 
 app.use(express.static("public"));
-// load the files that are in the public directory
 
 app.get("/", (request, response) => {
-	response.sendFile("/home/runner/chalkboard/index.html");
+	response.sendFile("/index.html");
 });
 
 app.listen(PORT, () => {
