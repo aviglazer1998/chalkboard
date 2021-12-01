@@ -4,6 +4,8 @@ const app = express();
 const router = express.Router();
 const mongoose = require("mongoose");
 const Student = require("./models/Students");
+const Instructor = require("./models/Instructor");
+const classes = require("./models/Classes");
 
 const dbURI = "mongodb+srv://aviglazer:Password123@chalkboard.mc7fa.mongodb.net/chalkboard?retryWrites=true&w=majority";
 mongoose
@@ -33,10 +35,10 @@ app.post("/sign-up", (req, res) => {
 	student.save();
 });
 
-app.get("/sign-up", (req, res) => {
+app.get("/student-sign-up", (req, res) => {
 	const student = new Student({
-		firstname: "miriam",
-		lastname: "A",
+		firstName: "miriam",
+		lastName: "A",
 		email: "miriamA@gmail.com",
 		password: "Password123!",
 		classes: [
@@ -61,6 +63,33 @@ app.get("/sign-up", (req, res) => {
 		});
 });
 
+app.get("/instructor-sign-up", (req, res) => {
+	const instructor = new Instructor({
+		firstName: "mark",
+		lastName: "A",
+		email: "markA@gmail.com",
+		password: "Password123!",
+		classes: [
+			{
+				className: "CSCI 355",
+				classId: "355",
+				classStart: "8:00",
+				classEnd: "9:00",
+				classDays: "MWF",
+				classCapacity: "20",
+				classDescription: "This is a class",
+			},
+		],
+	});
+	instructor
+		.save()
+		.then((result) => {
+			res.send(result);
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+});
 app.listen(() => {
 	console.log(`App listening on port 8000`);
 });
