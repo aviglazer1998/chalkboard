@@ -52,23 +52,25 @@
 					</div>
 
 					<div class="input">
-						<label for="first-name">First Name</label>
-						<br />
-						<input type="text" placeholder="Enter First Name" id="first-name" required />
-						<br />
-						<label for="last-name">Last Name</label>
-						<br />
-						<input type="text" placeholder="Enter Last Name" id="last-name" required />
-						<br />
-						<label for="email">Email Address</label>
-						<br />
-						<input type="email" placeholder="Enter Email for Username" id="email" required />
-						<br />
-						<label for="password">Password</label>
-						<br />
-						<input type="password" placeholder="Enter New Password" id="password" required />
-						<br />
-						<button class="signupbtn" type="submit">Sign Up</button>
+						<form action="/sign-up" method="POST">
+							<label for="first-name">First Name</label>
+							<br />
+							<input type="text" placeholder="Enter First Name" id="first-name" name="firstName" required />
+							<br />
+							<label for="last-name">Last Name</label>
+							<br />
+							<input type="text" placeholder="Enter Last Name" id="last-name" name="lastName" required />
+							<br />
+							<label for="email">Email Address</label>
+							<br />
+							<input type="email" placeholder="Enter Email for Username" id="email" name="email" required />
+							<br />
+							<label for="password">Password</label>
+							<br />
+							<input type="password" placeholder="Enter New Password" id="password" name="password" required />
+							<br />
+							<button class="signupbtn" type="submit">Sign Up</button>
+						</form>
 					</div>
 				</div>
 			</form>
