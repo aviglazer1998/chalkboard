@@ -72,7 +72,7 @@
         <div class="container">
           <h3>Create an account</h3>
 
-          <div class="checkboxes">
+          <!-- <div class="checkboxes">
             <div class="check">
               <input type="checkbox" id="student-box" class="re" check />
               <label for="student-box">Sign up as a student</label>
@@ -82,7 +82,7 @@
               <input type="checkbox" id="instructor-box" class="re" check />
               <label for="instructor-box">Sign up as an instructor</label>
             </div>
-          </div>
+          </div> -->
 
           <div class="input">
             <form action="/sign-up" method="POST">
@@ -126,7 +126,21 @@
                 required
               />
               <br />
-              <button class="signupbtn" type="submit">Sign Up</button>
+              <button
+                class="signupbtn"
+                type="submit"
+                onclick="location.href='./HTML/homePageInstructor.html'"
+              >
+                Sign Up as an Instructor
+              </button>
+              <br />
+              <button
+                class="signupbtn"
+                type="submit"
+                onclick="location.href='./HTML/homePageStudent.html'"
+              >
+                Sign Up as a Student
+              </button>
             </form>
           </div>
         </div>
