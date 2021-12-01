@@ -7,11 +7,11 @@ const Student = require("./models/Students");
 const Instructor = require("./models/Instructor");
 const classes = require("./models/Classes");
 
-const dbURI = "mongodb+srv://aviglazer:Password123@chalkboard.mc7fa.mongodb.net/chalkboard?retryWrites=true&w=majority";
-mongoose
-	.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
-	.then((result) => app.listen(8000))
-	.catch((err) => console.log(err));
+// const dbURI = "mongodb+srv://aviglazer:Password123@chalkboard.mc7fa.mongodb.net/chalkboard?retryWrites=true&w=majority";
+// mongoose
+// 	.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+// 	.then((result) => app.listen(8000))
+// 	.catch((err) => console.log(err));
 
 app.use(bodyParser.json());
 
