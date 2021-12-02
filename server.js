@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 app.get("/", (request, response) => {
-	response.sendFile("index.html");
+	response.sendFile(__dirname + "/public/HTML/index.html");
 });
 
 app.post("/sign-up", (req, res) => {
