@@ -6,30 +6,20 @@ const mongoose = require("mongoose");
 const Student = require("./models/Students");
 const Instructor = require("./models/Instructor");
 const classes = require("./models/Classes");
-const PORT = process.env.PORT || 3000;
-
+const Admin = require("./models/Admin");
 const dbURI = "mongodb+srv://aviglazer:Password123@chalkboard.mc7fa.mongodb.net/chalkboard?retryWrites=true&w=majority";
 mongoose
 	.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
-	.then((result) => {
-    app.listen(PORT, () => {
-    console.log(`App listening on port ${PORT}`);
-    });
-  })
+	.then((result) => app.listen(8000))
 	.catch((err) => console.log(err));
-app.use(express.static('public'));
- // load the files that are in the public directory
-
 app.use(bodyParser.json());
-
 app.use(bodyParser.urlencoded({ extended: true }));
-
 app.use(express.static("public"));
-
 app.get("/", (request, response) => {
 	response.sendFile(__dirname + "/public/HTML/index.html");
 });
 
+router.get("/sign-up", (req, res) => {
 app.get("/sign-up", (req, res) => {
 	const student = new Student({
 		firstName: "miriam",
@@ -43,37 +33,31 @@ app.get("/sign-up", (req, res) => {
 	res.send("student added");
 });
 
+router.post("/student-sign-up", (req, res) => {
 app.post("/student-sign-up", (req, res) => {
 	const student = new Student({
 		firstName: req.body.firstName,
 		lastName: req.body.lastName,
 		email: req.body.email,
 		password: req.body.password,
+		type: "student",
 		classes: [],
 	});
-
 	student.save();
+	res.sendFile(__dirname + "/public/HTML/homePageStudent.html");
 });
 
-app.get("/student-sign-up", (req, res) => {
-	const student = new Student({
-		firstName: "miriam",
-		lastName: "A",
-		email: "miriamA@gmail.com",
-		password: "Password123!",
-		classes: [
-			{
-				className: "CSCI 355",
-				classId: "355",
-				classStart: "8:00",
-				classEnd: "9:00",
-				classDays: "MWF",
-				classInstructor: "Abromov",
-				classDescription: "This is a class",
-			},
-		],
+app.post("/instructor-sign-up", (req, res) => {
+	const instructor = new Instructor({
+		firstName: req.body.firstName,
+		lastName: req.body.lastName,
+		email: req.body.email,
+		password: req.body.password,
+		type: "instructor",
+		classes: [],
 	});
 	instructor.save();
+	res.sendFile(__dirname + "/public/HTML/homePageInstructor.html");
 });
 
 app.get("/instructor-sign-in", (req, res) => {
@@ -93,32 +77,40 @@ app.get("/instructor-sign-in", (req, res) => {
 		res.send("invalid");
 	}
 });
-
-
-app.get("/instructor-sign-up", (req, res) => {
-	const instructor = new Instructor({
-		firstName: "mark",
-		lastName: "A",
-		email: "markA@gmail.com",
-		password: "Password123!",
-		classes: [
-			{
-				className: "CSCI 355",
-				classId: "355",
-				classStart: "8:00",
-				classEnd: "9:00",
-				classDays: "MWF",
-				classCapacity: "20",
-				classDescription: "This is a class",
-			},
-		],
-	});
-	instructor
-		.save()
-		.then((result) => {
-			res.send(result);
-		})
-		.catch((err) => {
-			console.log(err);
+app.get("/student-sign-in", (req, res) => {
+	if (req.query.email && req.query.password && req.query.type === "student") {
+		Student.findOne({ email: req.query.email, password: req.query.password }, (err, student) => {
+			if (err) {
+				console.log(err);
+			} else {
+				if (student) {
+					res.send(student);
+				} else {
+					res.send("invalid");
+				}
+			}
 		});
+	} else {
+		res.send("invalid");
+	}
+});
+app.get("/admin-sign-in", (req, res) => {
+	if (req.query.email && req.query.password && req.query.type === "admin") {
+		Admin.findOne({ email: req.query.email, password: req.query.password }, (err, admin) => {
+			if (err) {
+				console.log(err);
+			} else {
+				if (admin) {
+					res.send(admin);
+				} else {
+					res.send("invalid");
+				}
+			}
+		});
+	} else {
+		res.send("invalid");
+	}
+});
+app.listen(() => {
+	console.log(`App listening on port 8000`);
 });
