@@ -8,11 +8,11 @@ const classesSchema = new Schema({
 	classEnd: String,
 	classDays: String,
 	classInstructor: String,
-    classCapacity: Number,
-    classLocation: String,
+	classCapacity: Number,
+	classLocation: String,
 	classDescription: String,
 });
 
-const Classes = mongoose.model("Classes", studentSchema);
+const Classes = mongoose.model("Classes", classesSchema);
 
 module.exports = Classes;
