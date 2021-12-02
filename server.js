@@ -109,6 +109,27 @@ app.get("/admin-sign-in", (req, res) => {
 		res.send("invalid");
 	}
 });
+
+app.get("/all-students", (req, res) => {
+	Student.find({}, (err, students) => {
+		if (err) {
+			console.log(err);
+		} else {
+			res.send(students);
+		}
+	});
+});
+
+app.get("/all-instructors", (req, res) => {
+	Instructor.find({}, (err, instructors) => {
+		if (err) {
+			console.log(err);
+		} else {
+			res.send(instructors);
+		}
+	});
+});
+
 app.listen(() => {
 	console.log(`App listening on port 8000`);
 });
