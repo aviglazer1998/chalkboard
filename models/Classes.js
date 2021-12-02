@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const Student = require("./Students");
+
 
 const classesSchema = new Schema({
 	className: String,
@@ -13,6 +15,6 @@ const classesSchema = new Schema({
 	classDescription: String,
 });
 
-const Classes = mongoose.model("Classes", studentSchema);
+// const Classes = mongoose.model("Classes", studentSchema);
 
-module.exports = Classes;
+// module.exports = Classes;

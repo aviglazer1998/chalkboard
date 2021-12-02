@@ -6,21 +6,22 @@ const mongoose = require("mongoose");
 const Student = require("./models/Students");
 const Instructor = require("./models/Instructor");
 const classes = require("./models/Classes");
+const PORT = process.env.PORT || 3000;
 
-// const dbURI = "mongodb+srv://aviglazer:Password123@chalkboard.mc7fa.mongodb.net/chalkboard?retryWrites=true&w=majority";
-// mongoose
-// 	.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
-// 	.then((result) => app.listen(8000))
-// 	.catch((err) => console.log(err));
+const dbURI = "mongodb+srv://aviglazer:Password123@chalkboard.mc7fa.mongodb.net/chalkboard?retryWrites=true&w=majority";
+mongoose
+	.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+	.then((result) => {
+    app.listen(PORT, () => {
+    console.log(`App listening on port ${PORT}`);
+    });
+  })
+	.catch((err) => console.log(err));
+app.use(express.static('public'));
+ // load the files that are in the public directory
 
-app.use(bodyParser.json());
-
-app.use(bodyParser.urlencoded({ extended: true }));
-
-app.use(express.static("public"));
-
-app.get("/", (request, response) => {
-	response.sendFile("index.html");
+app.get('/', (request, response) => {
+  response.sendFile(__dirname + '/public/index.html');
 });
 
 app.post("/sign-up", (req, res) => {
@@ -89,7 +90,4 @@ app.get("/instructor-sign-up", (req, res) => {
 		.catch((err) => {
 			console.log(err);
 		});
-});
-app.listen(() => {
-	console.log(`App listening on port 8000`);
 });
