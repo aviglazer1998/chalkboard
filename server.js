@@ -24,7 +24,7 @@ app.get("/", (request, response) => {
 	response.sendFile(__dirname + "/public/HTML/index.html");
 });
 
-app.get("/sign-up", (req, res) => {
+router.get("/sign-up", (req, res) => {
 	const student = new Student({
 		firstName: "miriam",
 		lastName: "A",
@@ -37,7 +37,7 @@ app.get("/sign-up", (req, res) => {
 	res.send("student added");
 });
 
-app.post("/student-sign-up", (req, res) => {
+router.post("/student-sign-up", (req, res) => {
 	const student = new Student({
 		firstName: req.body.firstName,
 		lastName: req.body.lastName,
@@ -47,6 +47,7 @@ app.post("/student-sign-up", (req, res) => {
 		classes: [],
 	});
 	student.save();
+	res.sendFile(__dirname + "/public/HTML/homePageStudent.html");
 });
 
 app.post("/instructor-sign-up", (req, res) => {
@@ -59,6 +60,7 @@ app.post("/instructor-sign-up", (req, res) => {
 		classes: [],
 	});
 	instructor.save();
+	res.sendFile(__dirname + "/public/HTML/homePageInstructor.html");
 });
 
 app.get("/instructor-sign-in", (req, res) => {
