@@ -6,6 +6,7 @@ const instructorSchema = new Schema({
 	lastName: String,
 	email: String,
 	password: String,
+	type: String,
 	classes: [
 		{
 			className: String,
@@ -13,7 +14,7 @@ const instructorSchema = new Schema({
 			classStart: String,
 			classEnd: String,
 			classDays: String,
-            classCapacity: Number,
+			classCapacity: Number,
 			classDescription: String,
 		},
 	],

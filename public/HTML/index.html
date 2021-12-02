@@ -56,29 +56,47 @@
           </div> -->
 
 					<div class="input">
-						<form action="/sign-up" method="POST">
+						<form action="/student-sign-up" method="POST">
 							<label for="first-name">First Name</label>
 							<br />
-							<input type="text" placeholder="Enter First Name" id="first-name" name="firstName" required />
+							<input type="text" placeholder="Enter First Name" id="student-first-name" name="firstName" required />
 							<br />
 							<label for="last-name">Last Name</label>
 							<br />
-							<input type="text" placeholder="Enter Last Name" id="last-name" name="lastName" required />
+							<input type="text" placeholder="Enter Last Name" id="student-last-name" name="lastName" required />
 							<br />
 							<label for="email">Email Address</label>
 							<br />
-							<input type="email" placeholder="Enter Email for Username" id="email" name="email" required />
+							<input type="email" placeholder="Enter Email for Username" id="student-email" name="email" required />
 							<br />
 							<label for="password">Password</label>
 							<br />
-							<input type="password" placeholder="Enter New Password" id="password" name="password" required />
-							<br />
-							<button class="signupbtn" type="submit">Sign Up as an Instructor</button>
+							<input type="password" placeholder="Enter New Password" id="student-password" name="password" required />
 							<br />
 							<button class="signupbtn" type="submit">Sign Up as a Student</button>
 						</form>
+						<br />
 
-						form
+						<form action="/instructor-sign-up" method="POST">
+							<label for="first-name">First Name</label>
+							<br />
+							<input type="text" placeholder="Enter First Name" id="innstructor-first-name" name="firstName" required />
+							<br />
+							<label for="last-name">Last Name</label>
+							<br />
+							<input type="text" placeholder="Enter Last Name" id="innstructor-last-name" name="lastName" required />
+							<br />
+							<label for="email">Email Address</label>
+							<br />
+							<input type="email" placeholder="Enter Email for Username" id="innstructor-email" name="email" required />
+							<br />
+							<label for="password">Password</label>
+							<br />
+							<input type="password" placeholder="Enter New Password" id="innstructor-password" name="password" required />
+							<br />
+							<button class="signupbtn" type="submit" value="Instructor">Sign Up as an Instructor</button>
+							<br />
+						</form>
 					</div>
 				</div>
 			</form>
