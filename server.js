@@ -19,12 +19,11 @@ app.get("/", (request, response) => {
 	response.sendFile(__dirname + "/public/HTML/index.html");
 });
 
-router.get("/sign-up", (req, res) => {
 app.get("/sign-up", (req, res) => {
 	const student = new Student({
-		firstName: "miriam",
-		lastName: "A",
-		email: "miriamA@gmail.com",
+		firstName: "Avi",
+		lastName: "G",
+		email: "aviG@gmail.com",
 		password: "Password123!",
 		type: "student",
 		classes: [],
@@ -33,7 +32,6 @@ app.get("/sign-up", (req, res) => {
 	res.send("student added");
 });
 
-router.post("/student-sign-up", (req, res) => {
 app.post("/student-sign-up", (req, res) => {
 	const student = new Student({
 		firstName: req.body.firstName,
@@ -44,7 +42,7 @@ app.post("/student-sign-up", (req, res) => {
 		classes: [],
 	});
 	student.save();
-	res.sendFile(__dirname + "/public/HTML/homePageStudent.html");
+	res.send("student added");
 });
 
 app.post("/instructor-sign-up", (req, res) => {
@@ -57,7 +55,7 @@ app.post("/instructor-sign-up", (req, res) => {
 		classes: [],
 	});
 	instructor.save();
-	res.sendFile(__dirname + "/public/HTML/homePageInstructor.html");
+	res.send("instructor added");
 });
 
 app.get("/instructor-sign-in", (req, res) => {
