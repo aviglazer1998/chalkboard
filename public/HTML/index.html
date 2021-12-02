@@ -2,14 +2,14 @@
 <html lang="en">
 	<head>
 		<title>Chalkboard Sign Up</title>
-		<link rel="stylesheet" href="CSS/index.css" />
+		<link rel="stylesheet" href="../CSS/index.css" />
 		<link href="https://fonts.googleapis.com/css2?family=Cabin:ital@0;1&display=swap" rel="stylesheet" />
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 		<!-- <script src="JS/index.js"></script> -->
 	</head>
 	<body>
 		<header>
-			<img id="logo" src="Images/chalkboard-logo.png" alt="chalkboard Logo" />
+			<img id="logo" src="../Images/chalkboard-logo.png" alt="chalkboard Logo" />
 			<h2>Some Line About Remote Learning and How Great it is</h2>
 			<hr />
 		</header>
@@ -25,13 +25,15 @@
 					<br />
 					<input type="password" placeholder="Enter Password" name="psw" id="passw" required />
 					<br />
-					<button class="loginbtn" type="submit" onclick="location.href='./HTML/homePageInstructor.html'">
+					<button class="loginbtn" type="submit" onclick="location.href='../HTML/homePageInstructor.html'">
 						Instructor Login
 					</button>
 					<br />
-					<button class="loginbtn" type="submit" onclick="location.href='./HTML/homePageStudent.html'">Student Login</button>
+					<button class="loginbtn" type="submit" onclick="location.href='../HTML/homePageStudent.html'">
+						Student Login
+					</button>
 					<br />
-					<button class="loginbtn" type="submit" onclick="location.href='./HTML/adminView.html'">Admin Login</button>
+					<button class="loginbtn" type="submit" onclick="location.href='../HTML/adminView.html'">Admin Login</button>
 				</div>
 			</form>
 
@@ -71,18 +73,15 @@
 							<br />
 							<input type="password" placeholder="Enter New Password" id="password" name="password" required />
 							<br />
-							<button class="signupbtn" type="submit">
-								Sign Up as an Instructor
-							</button>
+							<button class="signupbtn" type="submit">Sign Up as an Instructor</button>
 							<br />
-							<button class="signupbtn" type="submit">
-								Sign Up as a Student
-							</button>
+							<button class="signupbtn" type="submit">Sign Up as a Student</button>
 						</form>
+
+						form
 					</div>
 				</div>
 			</form>
 		</div>
-		<script src="JS/index.js"></script>
 	</body>
 </html>
