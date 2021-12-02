@@ -4,24 +4,24 @@
 	"description": "<img width=\"328\" alt=\"Sitemap - Teacher\" src=\"https://user-images.githubusercontent.com/51724278/136141126-eff8ffd7-d597-4e9b-84fa-e8faf8818449.png\">\r <img width=\"922\" alt=\"Sitemap - Teacher (Fancy)\" src=\"https://user-images.githubusercontent.com/51724278/136142325-880a12ec-eb87-4d64-a91f-6834aa8e86a1.png\">\r <img width=\"361\" alt=\"Sitemap - Student\" src=\"https://user-images.githubusercontent.com/51724278/136141135-5363b1ce-cc68-4589-ad70-d721de28ac86.png\">\r <img width=\"628\" alt=\"Sitemap - Student (Fancy)\" src=\"https://user-images.githubusercontent.com/51724278/136142316-459da4cd-e8fd-4c8d-ab45-2c41707f6fb2.png\">",
 	"main": "index.js",
 	"scripts": {
-	  "start": "node server.js",
-	  "test": "echo \"Error: no test specified\" && exit 1"
+		"start": "node server.js",
+		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"repository": {
-	  "type": "git",
-	  "url": "git+https://github.com/aviglazer1998/chalkboard.git"
+		"type": "git",
+		"url": "git+https://github.com/aviglazer1998/chalkboard.git"
 	},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
 	"bugs": {
-	  "url": "https://github.com/aviglazer1998/chalkboard/issues"
+		"url": "https://github.com/aviglazer1998/chalkboard/issues"
 	},
 	"homepage": "https://github.com/aviglazer1998/chalkboard#readme",
 	"dependencies": {
-	  "body-parser": "^1.19.0",
-	  "express": "^4.17.1",
-	  "mongoose": "^6.0.14"
+		"body-parser": "^1.19.0",
+		"express": "^4.17.1",
+		"mongoose": "^6.0.14",
+		"mongodb": "^4.2.0"
 	}
-  }
-  
+}
