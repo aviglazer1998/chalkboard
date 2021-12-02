@@ -10,11 +10,12 @@ const Admin = require("./models/Admin");
 const dbURI = "mongodb+srv://aviglazer:Password123@chalkboard.mc7fa.mongodb.net/chalkboard?retryWrites=true&w=majority";
 mongoose
 	.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
-	.then((result) => app.listen(8000))
+	.then((result) => app.listen(process.env.PORT || 8000))
 	.catch((err) => console.log(err));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
+
 app.get("/", (request, response) => {
 	response.sendFile(__dirname + "/public/HTML/index.html");
 });
@@ -33,6 +34,7 @@ app.get("/sign-up", (req, res) => {
 });
 
 app.post("/student-sign-up", (req, res) => {
+	console.log(req.body);
 	const student = new Student({
 		firstName: req.body.firstName,
 		lastName: req.body.lastName,
