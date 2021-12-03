@@ -13,9 +13,16 @@ mongoose
 	.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
 	.then((result) => app.listen(process.env.PORT || 8000))
 	.catch((err) => console.log(err));
+
 app.use(bodyParser.json());
+
 app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use(express.static("public"));
+
+app.listen(() => {
+	console.log(`App listening on port 8000`);
+});
 
 app.get("/", (request, response) => {
 	response.sendFile(__dirname + "/public/HTML/index.html");
@@ -134,13 +141,12 @@ app.post("/admin-sign-in", (req, res) => {
 		}
 	});
 });
-
-app.get("one-student", (req, res) => {
-	Student.findOne({ email: req.query.email }, (err, student) => {
+app.get("/all-students", (req, res) => {
+	Student.find({}, (err, students) => {
 		if (err) {
 			console.log(err);
 		} else {
-			res.send(student);
+			res.send(students);
 		}
 	});
 });
@@ -155,6 +161,12 @@ app.get("/all-instructors", (req, res) => {
 	});
 });
 
-app.listen(() => {
-	console.log(`App listening on port 8000`);
+app.get("/all-classes", (req, res) => {
+	classes.find({}, (err, classes) => {
+		if (err) {
+			console.log(err);
+		} else {
+			res.send(classes);
+		}
+	});
 });
