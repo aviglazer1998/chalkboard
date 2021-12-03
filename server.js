@@ -7,6 +7,7 @@ const Student = require("./models/Students");
 const Instructor = require("./models/Instructor");
 const classes = require("./models/Classes");
 const Admin = require("./models/Admin");
+
 const dbURI = "mongodb+srv://aviglazer:Password123@chalkboard.mc7fa.mongodb.net/chalkboard?retryWrites=true&w=majority";
 mongoose
 	.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -34,7 +35,6 @@ app.get("/sign-up", (req, res) => {
 });
 
 app.post("/student-sign-up", (req, res) => {
-	console.log(req.body);
 	const student = new Student({
 		firstName: req.body.firstName,
 		lastName: req.body.lastName,
@@ -44,7 +44,7 @@ app.post("/student-sign-up", (req, res) => {
 		classes: [],
 	});
 	student.save();
-	res.send("student added");
+	res.sendFile(__dirname + "/public/HTML/index.html");
 });
 
 app.post("/instructor-sign-up", (req, res) => {
@@ -57,7 +57,6 @@ app.post("/instructor-sign-up", (req, res) => {
 		classes: [],
 	});
 	instructor.save();
-	res.send("instructor added");
 });
 
 app.get("/instructor-sign-in", (req, res) => {
@@ -67,7 +66,7 @@ app.get("/instructor-sign-in", (req, res) => {
 				console.log(err);
 			} else {
 				if (instructor) {
-					res.send(instructor);
+					res.sendFile(__dirname + "/public/HTML/homePageInstructor.html");
 				} else {
 					res.send("invalid");
 				}
@@ -78,13 +77,13 @@ app.get("/instructor-sign-in", (req, res) => {
 	}
 });
 app.get("/student-sign-in", (req, res) => {
-	if (req.query.email && req.query.password && req.query.type === "student") {
+	if (req.body.email && req.body.password && req.body.type === "student") {
 		Student.findOne({ email: req.query.email, password: req.query.password }, (err, student) => {
 			if (err) {
 				console.log(err);
 			} else {
 				if (student) {
-					res.send(student);
+					res.sendFile(__dirname + "/public/HTML/homePageStudent.html");
 				} else {
 					res.send("invalid");
 				}
