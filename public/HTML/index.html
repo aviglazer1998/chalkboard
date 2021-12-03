@@ -14,26 +14,18 @@
 			<hr />
 		</header>
 		<div class="page">
-			<form class="signin-container">
+			<form class="signin-container" method="POST" action="/sign-in">
 				<div class="container input">
 					<h3>Sign in to your account</h3>
 					<label for="uname">Email Address</label>
 					<br />
-					<input type="text" placeholder="Enter Email" name="uname" id="uname" required />
+					<input type="text" placeholder="Enter Email" name="email" id="uname" required />
 					<br />
 					<label for="passw">Password</label>
 					<br />
-					<input type="password" placeholder="Enter Password" name="psw" id="passw" required />
+					<input type="password" placeholder="Enter Password" name="password" id="passw" required />
 					<br />
-					<button class="loginbtn" type="submit" onclick="location.href='../HTML/homePageInstructor.html'">
-						Instructor Login
-					</button>
-					<br />
-					<button class="loginbtn" type="submit" onclick="location.href='../HTML/homePageStudent.html'">
-						Student Login
-					</button>
-					<br />
-					<button class="loginbtn" type="submit" onclick="location.href='../HTML/adminView.html'">Admin Login</button>
+					<input type="submit" value="Sign In" />
 				</div>
 			</form>
 
