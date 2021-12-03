@@ -45,19 +45,17 @@
 
 					<div class="input">
 						<form action="/sign-up" method="POST">
-
 							<div class="checkboxes">
-            					<div class="check">
-              						<input type="checkbox" id="student-box" name="box" class="boxes" onclick="onlyOne(this)" />
-              						<label for="student-box">Sign up as a student</label>
-            					</div>
+								<div class="check">
+									<input type="checkbox" id="student-box" name="box" class="boxes" onclick="onlyOne(this)" required />
+									<label for="student-box">Sign up as a student</label>
+								</div>
 
-            					<div class="check">
-              						<input type="checkbox" id="instructor-box" class="boxes" onclick="onlyOne(this)" />
-             						<label for="instructor-box">Sign up as an instructor</label>
-            					</div>
-          					</div>
-
+								<div class="check">
+									<input type="checkbox" id="instructor-box" class="boxes" onclick="onlyOne(this)" required />
+									<label for="instructor-box">Sign up as an instructor</label>
+								</div>
+							</div>
 
 							<label for="first-name">First Name</label>
 							<br />
@@ -105,6 +103,5 @@
 				</div>
 			</div>
 		</div>
-	
 	</body>
 </html>
