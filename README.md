@@ -3,7 +3,7 @@
 
 ## This project is a group with Avi Glazer and Miriam Alyeshmerni
 
-##Features
+## Features
 -create new student 
 -create new teacher
 -create new course
