@@ -21,43 +21,76 @@ app.get("/", (request, response) => {
 	response.sendFile(__dirname + "/public/HTML/index.html");
 });
 
-app.get("/sign-up", (req, res) => {
-	const student = new Student({
-		firstName: "Avi",
-		lastName: "G",
-		email: "aviG@gmail.com",
-		password: "Password123!",
-		type: "student",
-		classes: [],
-	});
-	student.save();
-	res.send("student added");
+app.post("/sign-up", (req, res) => {
+	if(req.body.box !== 'on'){
+		console.log('is instructor')
+		const instructor = new Instructor({
+			firstName: req.body.firstName,
+			lastName: req.body.lastName,
+			email: req.body.email,
+			password: req.body.password,
+			type: "instructor",
+			classes: [],
+		});
+		instructor.save();
+		res.sendFile(__dirname + "/public/HTML/index.html");
+	}
+	else{
+		console.log('is student')
+		const student = new Student({
+			firstName: req.body.firstName,
+			lastName: req.body.lastName,
+			email: req.body.email,
+			password: req.body.password,
+			type: "student",
+			classes: [],
+		});
+		student.save();
+		res.sendFile(__dirname + "/public/HTML/index.html");
+	}
+	// const student = new Student({
+	// 	firstName: "Avi",
+	// 	lastName: "G",
+	// 	email: "aviG@gmail.com",
+	// 	password: "Password123!",
+	// 	type: "student",
+	// 	classes: [],
+	// });
+	// student.save();
+	// res.send("student added");
 });
 
-app.post("/student-sign-up", (req, res) => {
-	const student = new Student({
-		firstName: req.body.firstName,
-		lastName: req.body.lastName,
-		email: req.body.email,
-		password: req.body.password,
-		type: "student",
-		classes: [],
-	});
-	student.save();
-	res.sendFile(__dirname + "/public/HTML/index.html");
-});
+// app.post("/student-sign-up", (req, res) => {
+// 	// console.log(req.body.box);
+// 	if(req.body.box !== 'on'){
+// 		console.log('is instructor')
+// 	}
+// 	else{
+// 		console.log('is student')
+// 	}
+// 	const student = new Student({
+// 		firstName: req.body.firstName,
+// 		lastName: req.body.lastName,
+// 		email: req.body.email,
+// 		password: req.body.password,
+// 		type: "student",
+// 		classes: [],
+// 	});
+// 	student.save();
+// 	res.sendFile(__dirname + "/public/HTML/index.html");
+// });
 
-app.post("/instructor-sign-up", (req, res) => {
-	const instructor = new Instructor({
-		firstName: req.body.firstName,
-		lastName: req.body.lastName,
-		email: req.body.email,
-		password: req.body.password,
-		type: "instructor",
-		classes: [],
-	});
-	instructor.save();
-});
+// app.post("/instructor-sign-up", (req, res) => {
+// 	const instructor = new Instructor({
+// 		firstName: req.body.firstName,
+// 		lastName: req.body.lastName,
+// 		email: req.body.email,
+// 		password: req.body.password,
+// 		type: "instructor",
+// 		classes: [],
+// 	});
+// 	instructor.save();
+// });
 
 app.get("/instructor-sign-in", (req, res) => {
 	Instructor.findOne({ email: req.body.email }, (err, instructor) => {

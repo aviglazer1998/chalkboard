@@ -5,7 +5,7 @@
 		<link rel="stylesheet" href="../CSS/index.css" />
 		<link href="https://fonts.googleapis.com/css2?family=Cabin:ital@0;1&display=swap" rel="stylesheet" />
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-		<!-- <script src="JS/index.js"></script> -->
+		<script src="../JS/index.js"></script>
 	</head>
 	<body>
 		<header>
@@ -43,20 +43,22 @@
 				<div class="container">
 					<h3>Create an account</h3>
 
-					<!-- <div class="checkboxes">
-            <div class="check">
-              <input type="checkbox" id="student-box" class="re" check />
-              <label for="student-box">Sign up as a student</label>
-            </div>
-
-            <div class="check">
-              <input type="checkbox" id="instructor-box" class="re" check />
-              <label for="instructor-box">Sign up as an instructor</label>
-            </div>
-          </div> -->
-
 					<div class="input">
-						<form action="/student-sign-up" method="POST">
+						<form action="/sign-up" method="POST">
+
+							<div class="checkboxes">
+            					<div class="check">
+              						<input type="checkbox" id="student-box" name="box" class="boxes" onclick="onlyOne(this)" />
+              						<label for="student-box">Sign up as a student</label>
+            					</div>
+
+            					<div class="check">
+              						<input type="checkbox" id="instructor-box" class="boxes" onclick="onlyOne(this)" />
+             						<label for="instructor-box">Sign up as an instructor</label>
+            					</div>
+          					</div>
+
+
 							<label for="first-name">First Name</label>
 							<br />
 							<input type="text" placeholder="Enter First Name" id="student-first-name" name="firstName" required />
@@ -73,11 +75,11 @@
 							<br />
 							<input type="password" placeholder="Enter New Password" id="student-password" name="password" required />
 							<br />
-							<input type="submit" value="Student Sign Up" />
+							<input type="submit" value="Sign Up" />
 						</form>
 						<br />
 
-						<form action="/instructor-sign-up" method="POST">
+						<!-- <form action="/instructor-sign-up" method="POST">
 							<label for="first-name">First Name</label>
 							<br />
 							<input type="text" placeholder="Enter First Name" id="innstructor-first-name" name="firstName" required />
@@ -98,10 +100,11 @@
 							should it be button or input with submit type?
 							<button class="signupbtn" type="submit" value="Instructor">Sign Up as an Instructor</button>
 							<br />
-						</form>
+						</form> -->
 					</div>
 				</div>
 			</div>
 		</div>
+	
 	</body>
 </html>
