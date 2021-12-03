@@ -3,6 +3,16 @@
 
 ## This project is a group with Avi Glazer and Miriam Alyeshmerni
 
+## Features
+-create new student 
+-create new teacher
+-create new course
+-join course
+-search course
+-sign in and signup
+-admin view 
+And more!!
+
 
 ### While doing this portion of the term project I learend how to create sitemaps and wireframes as well as the productivity that they bring to a large project like this one.
 ### For this part of the project my partner and I went through what we wanted on the sitemap and wireframes and once we formulated an idea i created the sitemap while my partner created the wireframe. after both were created we each looked over the others work to look for mistakes and fix anything we were unhappy with 
