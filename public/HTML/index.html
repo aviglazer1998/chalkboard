@@ -19,11 +19,11 @@
 					<h3>Sign in to your account</h3>
 					<label for="uname">Email Address</label>
 					<br />
-					<input type="text" placeholder="Enter Email" name="email" id="uname" />
+					<input type="text" placeholder="Enter Email" name="email" id="uname" required />
 					<br />
 					<label for="passw">Password</label>
 					<br />
-					<input type="password" placeholder="Enter Password" name="password" id="passw" />
+					<input type="password" placeholder="Enter Password" name="password" id="passw" required />
 					<br />
 					<input type="submit" value="Sign In" />
 				</div>
@@ -39,12 +39,12 @@
 						<form action="/sign-up" method="POST">
 							<div class="checkboxes">
 								<div class="check">
-									<input type="checkbox" id="student-box" name="box" class="boxes" onclick="onlyOne(this)" required />
+									<input type="checkbox" id="student-box" name="box" class="boxes" onclick="onlyOne(this)" />
 									<label for="student-box">Sign up as a student</label>
 								</div>
 
 								<div class="check">
-									<input type="checkbox" id="instructor-box" class="boxes" onclick="onlyOne(this)" required />
+									<input type="checkbox" id="instructor-box" class="boxes" onclick="onlyOne(this)" />
 									<label for="instructor-box">Sign up as an instructor</label>
 								</div>
 							</div>
