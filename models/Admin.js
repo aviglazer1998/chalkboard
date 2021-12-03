@@ -11,12 +11,4 @@ const adminSchema = new Schema({
 
 const Admin = mongoose.model("Admin", adminSchema);
 
-module.exports = {
-	fetchData: function (callback) {
-		var userData = Admin.find({});
-		userData.exec(function (err, data) {
-			if (err) throw err;
-			return callback(data);
-		});
-	},
-};
+module.exports = Admin;

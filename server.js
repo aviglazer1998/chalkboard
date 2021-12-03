@@ -5,8 +5,8 @@ const router = express.Router();
 const mongoose = require("mongoose");
 const Student = require("./models/Students");
 const Instructor = require("./models/Instructor");
-const classes = require("./models/Classes");
 const Admin = require("./models/Admin");
+const classes = require("./models/Classes");
 
 const dbURI = "mongodb+srv://aviglazer:Password123@chalkboard.mc7fa.mongodb.net/chalkboard?retryWrites=true&w=majority";
 mongoose
@@ -60,63 +60,54 @@ app.post("/instructor-sign-up", (req, res) => {
 });
 
 app.get("/instructor-sign-in", (req, res) => {
-	if (req.query.email && req.query.password && req.query.type === "instructor") {
-		Instructor.findOne({ email: req.query.email, password: req.query.password }, (err, instructor) => {
-			if (err) {
-				console.log(err);
-			} else {
-				if (instructor) {
-					res.sendFile(__dirname + "/public/HTML/homePageInstructor.html");
-				} else {
-					res.send("invalid");
-				}
-			}
-		});
-	} else {
-		res.send("invalid");
-	}
-});
-app.get("/student-sign-in", (req, res) => {
-	if (req.body.email && req.body.password && req.body.type === "student") {
-		Student.findOne({ email: req.query.email, password: req.query.password }, (err, student) => {
-			if (err) {
-				console.log(err);
-			} else {
-				if (student) {
-					res.sendFile(__dirname + "/public/HTML/homePageStudent.html");
-				} else {
-					res.send("invalid");
-				}
-			}
-		});
-	} else {
-		res.send("invalid");
-	}
-});
-app.get("/admin-sign-in", (req, res) => {
-	if (req.query.email && req.query.password && req.query.type === "admin") {
-		Admin.findOne({ email: req.query.email, password: req.query.password }, (err, admin) => {
-			if (err) {
-				console.log(err);
-			} else {
-				if (admin) {
-					res.send(admin);
-				} else {
-					res.send("invalid");
-				}
-			}
-		});
-	} else {
-		res.send("invalid");
-	}
-});
-
-app.get("/all-students", (req, res) => {
-	Student.find({}, (err, students) => {
+	Instructor.findOne({ email: req.body.email }, (err, instructor) => {
 		if (err) {
 			console.log(err);
 		} else {
-			res.send(students);
+			if (instructor) {
+				res.sendFile(__dirname + "/public/HTML/homePageInstructor.html");
+			} else {
+				res.send("invalid");
+			}
+		}
+	});
+});
+//these need to pull from the database
+
+app.post("/student-sign-in", (req, res) => {
+	Student.findOne({ email: req.body.email, password: req.body.password }, (err, student) => {
+		if (err) {
+			console.log(err);
+		} else {
+			if (student) {
+				res.sendFile(__dirname + "/public/HTML/homePageStudent.html");
+			} else {
+				res.send("invalid");
+			}
+		}
+	});
+});
+
+app.post("/admin-sign-in", (req, res) => {
+	Admin.findOne({ email: req.body.email, password: req.body.password }, (err, admin) => {
+		if (err) {
+			console.log(err);
+		} else {
+			if (admin) {
+				res.sendFile(__dirname + "/public/HTML/adminView.html");
+			} else {
+				res.send("invalid");
+			}
+		}
+	});
+});
+
+app.get("one-student", (req, res) => {
+	Student.findOne({ email: req.query.email }, (err, student) => {
+		if (err) {
+			console.log(err);
+		} else {
+			res.send(student);
 		}
 	});
 });
