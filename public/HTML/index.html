@@ -38,13 +38,14 @@
 					<div class="input">
 						<form action="/sign-up" method="POST">
 							<div class="checkboxes">
-								<div class="check">
-									<input type="checkbox" id="1" name="box" class="boxes" onclick="onlyOne(this.id)" required />
+								<div class="check" >
+									<!-- only one needs required  -->
+									<input type="checkbox" id="1" name="box" class="boxes" onclick="onlyOne(this.id)" />
 									<label for="student-box">Sign up as a student</label>
 								</div>
 
 								<div class="check">
-									<input type="checkbox" id="2" class="boxes" onclick="onlyOne(this.id)" required />
+									<input type="checkbox" id="2" class="boxes" onclick="onlyOne(this.id)"  />
 									<label for="instructor-box">Sign up as an instructor</label>
 								</div>
 							</div>
