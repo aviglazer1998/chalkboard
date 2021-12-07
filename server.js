@@ -194,6 +194,10 @@ app.get("/coursePageInstructor.html", (req, res) => {
 	res.sendFile(__dirname + "/public/HTML/coursePageInstructor.html");
 });
 
+app.get("/searchResults.html", (req, res) => {
+	res.sendFile(__dirname + "/public/HTML/searchResults.html");
+});
+
 // app.post("/student-sign-in", (req, res) => {
 // 	Student.findOne({ email: req.body.email, password: req.body.password }, (err, student) => {
 // 		if (err) {
