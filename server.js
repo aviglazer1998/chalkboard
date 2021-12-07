@@ -22,25 +22,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static("public"));
 
-
-
-
-
-
-
-
 // add this back in to allow it on the public website (heroku)
 
 // app.get("*", (request, response) => {
 // 	response.sendFile(path.join(__dirname, "public", "index.html"));
 // });
-
-
-
-
-
-
-
 
 app.listen(() => {
 	console.log(`App listening on port 8000`);
@@ -77,7 +63,6 @@ app.post("/sign-up", (req, res) => {
 		res.sendFile(__dirname + "/public/HTML/index.html");
 	}
 });
-
 
 app.post("/sign-in", (req, res) => {
 	Instructor.findOne({ email: req.body.email, password: req.body.password }, (err, instructor) => {
@@ -194,6 +179,7 @@ app.post("/createClass", (req, res) => {
 	});
 	newClass.save();
 	console.log("Class Created");
+	res.sendFile(__dirname + "/public/HTML/homePageInstructor.html");
 });
 
 app.get("/roster.html", (req, res) => {
@@ -207,8 +193,6 @@ app.get("/homePageInstructor.html", (req, res) => {
 app.get("/coursePageInstructor.html", (req, res) => {
 	res.sendFile(__dirname + "/public/HTML/coursePageInstructor.html");
 });
-
-
 
 // app.post("/student-sign-in", (req, res) => {
 // 	Student.findOne({ email: req.body.email, password: req.body.password }, (err, student) => {
@@ -237,7 +221,6 @@ app.get("/coursePageInstructor.html", (req, res) => {
 // 	}
 // 	});
 // });
-
 
 // app.post("/student-sign-up", (req, res) => {
 // 	// console.log(req.body.box);
