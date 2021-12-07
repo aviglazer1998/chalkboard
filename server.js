@@ -19,6 +19,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static("public"));
+app.get("*", (request, response) => {
+	response.sendFile(path.join(__dirname, "public", "index.html"));
+});
 
 app.listen(() => {
 	console.log(`App listening on port 8000`);
