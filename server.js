@@ -199,3 +199,39 @@ app.post("/all-admin", (req, res) => {
 		}
 	});
 });
+
+app.get("/index.html", (req, res) => {
+	res.sendFile(__dirname + "/public/HTML/index.html");
+});
+
+app.get("/homePageStudent.html", (req, res) => {
+	res.sendFile(__dirname + "/public/HTML/homePageStudent.html");
+});
+
+app.get("/studentCoursePage.html", (req, res) => {
+	res.sendFile(__dirname + "/public/HTML/studentCoursePage.html");
+});
+
+app.get("/AssignmentPage.html", (req, res) => {
+	res.sendFile(__dirname + "/public/HTML/AssignmentPage.html");
+});
+
+app.get("/searchClasses.html", (req, res) => {
+	res.sendFile(__dirname + "/public/HTML/searchClasses.html");
+});
+
+app.get("/createCourse.html", (req, res) => {
+	res.sendFile(__dirname + "/public/HTML/createCourse.html");
+});
+
+app.get("/roster.html", (req, res) => {
+	res.sendFile(__dirname + "/public/HTML/roster.html");
+});
+
+app.get("/homePageInstructor.html", (req, res) => {
+	res.sendFile(__dirname + "/public/HTML/homePageInstructor.html");
+});
+
+app.get("/coursePageInstructor.html", (req, res) => {
+	res.sendFile(__dirname + "/public/HTML/coursePageInstructor.html");
+});
