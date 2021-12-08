@@ -94,7 +94,12 @@ app.post("/sign-in", (req, res) => {
 								} else {
 									if (admin) {
 										// res.sendFile(__dirname + "/public/HTML/adminView.html");
-										res.render('admin');
+										Student.find({}, function (err, studentData) {
+											res.render('admin', {
+												practices: studentData,		
+											});
+										});
+										// res.render('admin');
 									} else {
 										console.log("no user");
 									}
@@ -109,6 +114,7 @@ app.post("/sign-in", (req, res) => {
 });
 
 app.get('/admin-view', (req, res) => {
+	//how to get instructors here too?
 	Student.find({}, function (err, studentData) {
 		// if (err) {
 		// 	console.log(err);
