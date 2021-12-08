@@ -204,6 +204,18 @@ app.post("/createClass", (req, res) => {
 	res.sendFile(__dirname + "/public/HTML/homePageInstructor.html");
 });
 
+//make this so that its deleting the right course and not 355 as the default
+app.get("/coursePageInstructor/deleteCourse", (req, res) => {
+	Classes.deleteOne({ className: "csci 355" }, (err) => {
+		if (err) {
+			console.log(err);
+		} else {
+			console.log("Class Deleted");
+			res.sendFile(__dirname + "/public/HTML/homePageInstructor.html");
+		}
+	});
+});
+
 app.get("/roster.html", (req, res) => {
 	res.sendFile(__dirname + "/public/HTML/roster.html");
 });
@@ -219,63 +231,3 @@ app.get("/coursePageInstructor.html", (req, res) => {
 app.get("/searchResults.html", (req, res) => {
 	res.sendFile(__dirname + "/public/HTML/searchResults.html");
 });
-
-// app.post("/student-sign-in", (req, res) => {
-// 	Student.findOne({ email: req.body.email, password: req.body.password }, (err, student) => {
-// 		if (err) {
-// 			console.log(err);
-// 		} else {
-// 			if (student) {
-// 				res.sendFile(__dirname + "/public/HTML/homePageStudent.html");
-// 			} else {
-// 				res.send("invalid");
-// 			}
-// 		}
-// 	});
-// });
-
-// app.post("/admin-sign-in", (req, res) => {
-// Admin.findOne({ email: req.body.email, password: req.body.password }, (err, admin) => {
-// 	if (err) {
-// 		console.log(err);
-// 	} else {
-// 		if (admin) {
-// 			res.sendFile(__dirname + "/public/HTML/adminView.html");
-// 		} else {
-// 			res.send("invalid");
-// 		}
-// 	}
-// 	});
-// });
-
-// app.post("/student-sign-up", (req, res) => {
-// 	// console.log(req.body.box);
-// 	if(req.body.box !== 'on'){
-// 		console.log('is instructor')
-// 	}
-// 	else{
-// 		console.log('is student')
-// 	}
-// 	const student = new Student({
-// 		firstName: req.body.firstName,
-// 		lastName: req.body.lastName,
-// 		email: req.body.email,
-// 		password: req.body.password,
-// 		type: "student",
-// 		classes: [],
-// 	});
-// 	student.save();
-// 	res.sendFile(__dirname + "/public/HTML/index.html");
-// });
-
-// app.post("/instructor-sign-up", (req, res) => {
-// 	const instructor = new Instructor({
-// 		firstName: req.body.firstName,
-// 		lastName: req.body.lastName,
-// 		email: req.body.email,
-// 		password: req.body.password,
-// 		type: "instructor",
-// 		classes: [],
-// 	});
-// 	instructor.save();
-// });
