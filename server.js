@@ -138,17 +138,6 @@ app.get("/one-class", (req, res) => {
 	});
 });
 
-app.post("/all-admin", (req, res) => {
-	Admin.findOne({}, (err, admin) => {
-		if (err) {
-			console.log(err);
-		} else {
-			res.send(admin);
-			console.log(admin);
-		}
-	});
-});
-
 app.get("/index.html", (req, res) => {
 	res.sendFile(__dirname + "/public/HTML/index.html");
 });
@@ -232,3 +221,5 @@ app.get("/coursePageInstructor.html", (req, res) => {
 app.get("/searchResults.html", (req, res) => {
 	res.sendFile(__dirname + "/public/HTML/searchResults.html");
 });
+
+// use passport js for user authentication
