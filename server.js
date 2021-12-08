@@ -205,14 +205,15 @@ app.post("/createClass", (req, res) => {
 });
 
 //make this so that its deleting the right course and not 355 as the default
-app.get("/coursePageInstructor/deleteCourse", (req, res) => {
+app.get("/deleteCourse", (req, res) => {
 	Classes.deleteOne({ className: "csci 355" }, (err) => {
 		if (err) {
 			console.log(err);
 		} else {
 			console.log("Class Deleted");
-			res.sendFile(__dirname + "/public/HTML/homePageInstructor.html");
 		}
+
+		res.sendFile(__dirname + "/public/HTML/homePageInstructor.html");
 	});
 });
 
