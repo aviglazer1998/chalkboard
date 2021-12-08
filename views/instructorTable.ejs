@@ -1,0 +1,7 @@
+<% practices.forEach(function (practice) { %>
+    <tr>
+      <td><%= practice.type%></td> 
+      <td><%= practice.firstName +' '+ practice.lastName%></td>
+      <td><%= practice.classes.className%></td>
+    </tr>
+  <% }) %>

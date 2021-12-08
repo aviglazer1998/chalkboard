@@ -7,14 +7,19 @@ const Student = require("./models/Students");
 const Instructor = require("./models/Instructor");
 const Admin = require("./models/Admin");
 const Classes = require("./models/Classes");
+const path = require('path');
 
 var id = 0;
+// app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
 
 const dbURI = "mongodb+srv://aviglazer:Password123@chalkboard.mc7fa.mongodb.net/chalkboard?retryWrites=true&w=majority";
 mongoose
 	.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
 	.then((result) => app.listen(process.env.PORT || 8000))
 	.catch((err) => console.log(err));
+
 
 app.use(bodyParser.json());
 
@@ -32,8 +37,10 @@ app.listen(() => {
 	console.log(`App listening on port 8000`);
 });
 
+
 app.get("/", (request, response) => {
 	response.sendFile(__dirname + "/public/HTML/index.html");
+	
 });
 
 app.post("/sign-up", (req, res) => {
@@ -64,6 +71,8 @@ app.post("/sign-up", (req, res) => {
 	}
 });
 
+
+
 app.post("/sign-in", (req, res) => {
 	Instructor.findOne({ email: req.body.email, password: req.body.password }, (err, instructor) => {
 		if (err) {
@@ -84,7 +93,8 @@ app.post("/sign-in", (req, res) => {
 									console.log(err);
 								} else {
 									if (admin) {
-										res.sendFile(__dirname + "/public/HTML/adminView.html");
+										// res.sendFile(__dirname + "/public/HTML/adminView.html");
+										res.render('admin');
 									} else {
 										console.log("no user");
 									}
@@ -95,6 +105,25 @@ app.post("/sign-in", (req, res) => {
 				});
 			}
 		}
+	});
+});
+
+app.get('/admin-view', (req, res) => {
+	Student.find({}, function (err, studentData) {
+		// if (err) {
+		// 	console.log(err);
+		// } else {
+		// 	Instructor.find({}, function (err, instructorData) {
+		// 		if (err) {
+		// 			console.log(err);
+				// } else {
+					res.render('admin', {
+						practices: studentData,
+						// practices: instructorData
+					});
+				// }
+			// });
+		// }	
 	});
 });
 
@@ -117,6 +146,8 @@ app.get("/all-instructors", (req, res) => {
 		}
 	});
 });
+
+
 
 app.get("/all-classes", (req, res) => {
 	Classes.find({}, (err, classes) => {

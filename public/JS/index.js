@@ -6,3 +6,4 @@ function onlyOne(id){
     }
     document.getElementById(id).checked = true;
 }
+
