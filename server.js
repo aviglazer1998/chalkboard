@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 const Student = require("./models/Students");
 const Instructor = require("./models/Instructor");
 const Admin = require("./models/Admin");
-const classes = require("./models/Classes");
+const Classes = require("./models/Classes");
 
 var id = 0;
 
@@ -119,11 +119,21 @@ app.get("/all-instructors", (req, res) => {
 });
 
 app.get("/all-classes", (req, res) => {
-	classes.find({}, (err, classes) => {
+	Classes.find({}, (err, classes) => {
 		if (err) {
 			console.log(err);
 		} else {
 			res.send(classes);
+		}
+	});
+});
+
+app.get("/one-class", (req, res) => {
+	Classes.findOne({ className: req.query.className }, (err, className) => {
+		if (err) {
+			console.log(err);
+		} else {
+			res.send(className);
 		}
 	});
 });
@@ -159,12 +169,24 @@ app.get("/searchClasses.html", (req, res) => {
 	res.sendFile(__dirname + "/public/HTML/searchClasses.html");
 });
 
+app.get("/classResults", (req, res) => {
+	Classes.findOne({ className: req.query.className }, (err, className) => {
+		if (err) {
+			console.log(err);
+			console.log("no class");
+		} else {
+			res.send(className);
+			console.log(className);
+		}
+	});
+});
+
 app.get("/createCourse.html", (req, res) => {
 	res.sendFile(__dirname + "/public/HTML/createCourse.html");
 });
 
 app.post("/createClass", (req, res) => {
-	const newClass = new classes({
+	const newClass = new Classes({
 		className: req.body.className,
 		classId: id++,
 		classStartDate: req.body.classStartDate,
