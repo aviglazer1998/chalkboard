@@ -3,9 +3,14 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+			crossorigin="anonymous"
+		/>
 		<link rel="stylesheet" href="../CSS/coursePageInstructor.css" />
-		<link href="https://fonts.googleapis.com/css2?family=Cabin:ital@0;1&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Cabin:ital@0;1&display=swap" rel="stylesheet" />
 
 		<title>Instructor Course Page</title>
 	</head>
@@ -46,7 +51,6 @@
 				<br />
 				<input type="button" class="instructor-waitlist" value="Add New Instructor" id="teacher-3" />
 			</div>
-			
 		</div>
 		<hr />
 
@@ -66,7 +70,6 @@
 				<label for="student-3">Hanna Ali</label>
 				<br />
 			</div>
-			
 		</div>
 		<hr />
 
@@ -153,11 +156,15 @@
 		</div>
 
 		<div class="delete-btn">
-			<input type="button" value="Delete Class" />
+			<form action="/deleteCourse" method="DELETE">
+				<input type="submit" value="Delete Class" />
+			</form>
 			<!-- <a href="../HTML/homePageInstructor.html">
 				<button>Course Home Page</button>
 			</a> -->
-			<input type="button" value="Leave Course" />
+			<form action="/leaveCourse" method="UPDATE">
+				<input type="submit" value="Leave Course" />
+			</form>
 		</div>
 	</body>
 </html>

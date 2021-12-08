@@ -3,10 +3,12 @@ const Schema = mongoose.Schema;
 
 const classesSchema = new Schema({
 	className: String,
-	classId: String,
-	classStart: String,
-	classEnd: String,
-	classDays: String,
+	classId: Number,
+	classStartDate: Date,
+	classEndDate: Date,
+	classStartTime: String,
+	classEndTime: String,
+	classDays: [String],
 	classInstructor: String,
 	classCapacity: Number,
 	classLocation: String,
