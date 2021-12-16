@@ -1,0 +1,14 @@
+<% practices.forEach(function (practice) { %>
+    <div class="class">
+        <a href="coursePage.html"
+          ><div class="container">
+            <h2> <%= practice.className %></h2>
+            <div class="class-info">
+              <b><%= practice.classId %></b>
+              <br />
+              <%= practice.ClassInstructor %>
+            </div>
+          </div></a
+        >
+      </div>
+  <% }) %>

@@ -2,12 +2,16 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 const router = express.Router();
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
+const passportLocalMongoose = require("passport-local-mongoose");
 const mongoose = require("mongoose");
 const Student = require("./models/Students");
 const Instructor = require("./models/Instructor");
 const Admin = require("./models/Admin");
-const Classes = require("./models/Classes");
+const Class = require("./models/Classes");
 const path = require('path');
+var session = require('express-session')
 
 var id = 0;
 // app.set('views', path.join(__dirname, 'views'));
@@ -21,11 +25,25 @@ mongoose
 	.catch((err) => console.log(err));
 
 
+app.use(require("express-session")({
+		secret: "Rusty is a dog",
+		resave: false,
+		saveUninitialized: false
+}));
+
 app.use(bodyParser.json());
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static("public"));
+
+app.use(passport.initialize());
+app.use(passport.session());
+ 
+// passport.use(new LocalStrategy(passport.authenticate()));
+// passport.serializeUser(passport.serializeUser());
+// passport.deserializeUser(Instructor.deserializeUser());
+
 
 // add this back in to allow it on the public website (heroku)
 
@@ -56,6 +74,18 @@ app.post("/sign-up", (req, res) => {
 		});
 		instructor.save();
 		res.sendFile(__dirname + "/public/HTML/index.html");
+		// Instructor.register(new Instructor({ email: email }),
+        //     password, function (err, user) {
+        // if (err) {
+        //     console.log(err);
+        //     return res.sendFile(__dirname + "/public/HTML/index.html");
+        // }
+ 
+        // passport.authenticate("local")(
+        //     req, res, function () {
+        //     res.render("instructorHomePage");
+        // });
+    // });
 	} else {
 		console.log("is student");
 		const student = new Student({
@@ -79,29 +109,25 @@ app.post("/sign-in", (req, res) => {
 			console.log(err);
 		} else {
 			if (instructor) {
-				res.sendFile(__dirname + "/public/HTML/homePageInstructor.html");
+				res.redirect('instructorHomePage')
 			} else if (!instructor) {
 				Student.findOne({ email: req.body.email, password: req.body.password }, (err, student) => {
 					if (err) {
 						console.log(err);
 					} else {
 						if (student) {
-							res.sendFile(__dirname + "/public/HTML/homePageStudent.html");
+							res.redirect('studentHomePage')
 						} else if (!student) {
 							Admin.findOne({ email: req.body.email, password: req.body.password }, (err, admin) => {
 								if (err) {
 									console.log(err);
 								} else {
 									if (admin) {
-										// res.sendFile(__dirname + "/public/HTML/adminView.html");
-										Student.find({}, function (err, studentData) {
-											res.render('admin', {
-												practices: studentData,		
-											});
-										});
-										// res.render('admin');
+										res.redirect('admin-view')
 									} else {
 										console.log("no user");
+										// alert('No User Found')
+										return res.redirect(__dirname + "/public/HTML/index.html");
 									}
 								}
 							});
@@ -116,22 +142,30 @@ app.post("/sign-in", (req, res) => {
 app.get('/admin-view', (req, res) => {
 	//how to get instructors here too?
 	Student.find({}, function (err, studentData) {
-		// if (err) {
-		// 	console.log(err);
-		// } else {
-		// 	Instructor.find({}, function (err, instructorData) {
-		// 		if (err) {
-		// 			console.log(err);
-				// } else {
-					res.render('admin', {
-						practices: studentData,
-						// practices: instructorData
-					});
-				// }
-			// });
-		// }	
+		res.render('admin', {
+			practices: studentData,		
+		});
 	});
+})
+
+app.get("/studentHomePage", (req, res) => {
+	Class.find({}, function (err, classData) {
+		res.render('studentHomePage', {
+			practices: classData,
+		})
+		// console.log(classData);
+	})
+})
+
+app.get("/instructorHomePage", (req, res) => {
+	Class.find({}, function (err, classData) {
+		res.render('instructorHomePage', {
+			practices: classData,
+		})
+		// console.log(classData);
+	})
 });
+
 
 app.get("/all-students", (req, res) => {
 	Student.find({}, (err, students) => {
@@ -155,6 +189,7 @@ app.get("/all-instructors", (req, res) => {
 
 
 
+
 app.get("/all-classes", (req, res) => {
 	Classes.find({}, (err, classes) => {
 		if (err) {
@@ -162,6 +197,10 @@ app.get("/all-classes", (req, res) => {
 		} else {
 			res.send(classes);
 		}
+		// res.render('admin', {
+		// 	practices: studentData,
+		// 	// practices: instructorData
+		// });
 	});
 });
 
@@ -179,9 +218,7 @@ app.get("/index.html", (req, res) => {
 	res.sendFile(__dirname + "/public/HTML/index.html");
 });
 
-app.get("/homePageStudent.html", (req, res) => {
-	res.sendFile(__dirname + "/public/HTML/homePageStudent.html");
-});
+
 
 app.get("/studentCoursePage.html", (req, res) => {
 	res.sendFile(__dirname + "/public/HTML/studentCoursePage.html");
@@ -247,9 +284,6 @@ app.get("/roster.html", (req, res) => {
 	res.sendFile(__dirname + "/public/HTML/roster.html");
 });
 
-app.get("/homePageInstructor.html", (req, res) => {
-	res.sendFile(__dirname + "/public/HTML/homePageInstructor.html");
-});
 
 app.get("/coursePageInstructor.html", (req, res) => {
 	res.sendFile(__dirname + "/public/HTML/coursePageInstructor.html");
