@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link rel="stylesheet" href="../CSS/searchClass.css" />
+		<title>Class Search</title>
+	</head>
+	<a class="active" href="./homePageInstructor.html">
+		<img id="banner" src="../Images/chalkboard-logo.png" alt="chalkboard Logo" />
+	</a>
+
+	<div class=".top-nav" style="float: right !important">
+		<a class="nav-item" href="./index.html">Sign Out</a>
+	</div>
+
+	<br />
+	<br />
+	<br />
+	<br />
+
+	<div>
+		<header>Search for classes</header>
+		<form method="GET" action="search-result">
+			<label for="className">Class Name:</label>
+			<input type="text" id="className" name="className" /><br />
+			<label for="classId">Class ID:</label>
+			<input type="text" id="classId" name="classId" /> <br />
+			<label for="instructorName">Instructor Name:</label>
+			<input type="text" id="instructorName" name="instructorName" /> <br />
+
+			<input type="submit" value="Search" />
+		</form>
+	</div>
+</html>

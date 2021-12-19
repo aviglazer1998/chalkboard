@@ -1,0 +1,21 @@
+<% async function addClass(){
+  //   NEED TO FIGURE OUT A WAY TO ADD A STUDENT TO THE ROSTER
+  
+//    const response = await context.http.put({ 
+//     url: `${id}/studentHomePage/${course.id}`,
+//     body: { msg: "This is in the body of a PUT request!" },
+//     encodeBodyAsJSON: true
+//   })
+//   // The response body is a BSON.Binary object. Parse it and return.
+//   return EJSON.parse(response.body.text()); 
+}%>
+<div>
+    <input type="button" class="instructor-waitlist" value="Join Waitlist" id="teacher-1" onclick="addClass()"/>
+    <label for="teacher-1"><%= id %></label>
+    <br />
+</div>
+
+
+<!-- <input type="button" class="instructor-waitlist" value="Join Waitlist" id="teacher-1" />
+        <label for="teacher-1"><%=  course.classInstructor %></label>
+        <br /> -->
