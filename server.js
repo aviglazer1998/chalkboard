@@ -1,22 +1,15 @@
 const express = require("express");
-const bodyParser = require("body-parser");
+const session = require("express-session");
 const app = express();
-const router = express.Router();
-const passport = require("passport");
-const LocalStrategy = require("passport-local");
-const passportLocalMongoose = require("passport-local-mongoose");
+const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const Student = require("./models/Students");
 const Instructor = require("./models/Instructor");
 const Admin = require("./models/Admin");
 const Class = require("./models/Classes");
-const path = require('path');
-var session = require('express-session')
 
 var id = 0;
-// app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-
+app.set("view engine", "ejs");
 
 const dbURI = "mongodb+srv://aviglazer:Password123@chalkboard.mc7fa.mongodb.net/chalkboard?retryWrites=true&w=majority";
 mongoose
@@ -24,12 +17,14 @@ mongoose
 	.then((result) => app.listen(process.env.PORT || 8000))
 	.catch((err) => console.log(err));
 
-
-app.use(require("express-session")({
-		secret: "Rusty is a dog",
-		resave: false,
-		saveUninitialized: false
-}));
+app.use(
+	session({
+		cookie: { maxAge: 1000 * 60 * 60 * 2, sameSite: true },
+		secret: "Super Secret",
+		resave: true,
+		saveUninitialized: false,
+	})
+);
 
 app.use(bodyParser.json());
 
@@ -37,28 +32,36 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static("public"));
 
-app.use(passport.initialize());
-app.use(passport.session());
- 
-// passport.use(new LocalStrategy(passport.authenticate()));
-// passport.serializeUser(passport.serializeUser());
-// passport.deserializeUser(Instructor.deserializeUser());
-
-
-// add this back in to allow it on the public website (heroku)
-
-// app.get("*", (request, response) => {
-// 	response.sendFile(path.join(__dirname, "public", "index.html"));
-// });
-
 app.listen(() => {
 	console.log(`App listening on port 8000`);
 });
 
+const redirectLogin = (req, res, next) => {
+	console.log(req.session.userId);
+	if (!req.session.userId) {
+		res.redirect("/");
+		console.log("redirected");
+	} else {
+		next();
+	}
+};
+
+const redirectHome = (req, res, next) => {
+	if (req.session.userId) {
+		if (req.session.type == "student") {
+			res.redirect("/studentHomePage");
+		} else if (req.session.type == "instructor") {
+			res.redirect("/instructorHomePage");
+		} else if (req.session.type == "admin") {
+			res.redirect("/adminView");
+		}
+	} else {
+		next();
+	}
+};
 
 app.get("/", (request, response) => {
 	response.sendFile(__dirname + "/public/HTML/index.html");
-	
 });
 
 app.post("/sign-up", (req, res) => {
@@ -75,17 +78,17 @@ app.post("/sign-up", (req, res) => {
 		instructor.save();
 		res.sendFile(__dirname + "/public/HTML/index.html");
 		// Instructor.register(new Instructor({ email: email }),
-        //     password, function (err, user) {
-        // if (err) {
-        //     console.log(err);
-        //     return res.sendFile(__dirname + "/public/HTML/index.html");
-        // }
- 
-        // passport.authenticate("local")(
-        //     req, res, function () {
-        //     res.render("instructorHomePage");
-        // });
-    // });
+		//     password, function (err, user) {
+		// if (err) {
+		//     console.log(err);
+		//     return res.sendFile(__dirname + "/public/HTML/index.html");
+		// }
+
+		// passport.authenticate("local")(
+		//     req, res, function () {
+		//     res.render("instructorHomePage");
+		// });
+		// });
 	} else {
 		console.log("is student");
 		const student = new Student({
@@ -101,29 +104,30 @@ app.post("/sign-up", (req, res) => {
 	}
 });
 
-
-
 app.post("/sign-in", (req, res) => {
 	Instructor.findOne({ email: req.body.email, password: req.body.password }, (err, instructor) => {
 		if (err) {
 			console.log(err);
 		} else {
 			if (instructor) {
-				res.redirect('instructorHomePage')
+				req.session.userId = req.body.email;
+				res.redirect("instructorHomePage");
 			} else if (!instructor) {
 				Student.findOne({ email: req.body.email, password: req.body.password }, (err, student) => {
 					if (err) {
 						console.log(err);
 					} else {
 						if (student) {
-							res.redirect('studentHomePage')
+							req.session.userId = req.body.email;
+							res.redirect("studentHomePage");
 						} else if (!student) {
 							Admin.findOne({ email: req.body.email, password: req.body.password }, (err, admin) => {
 								if (err) {
 									console.log(err);
 								} else {
 									if (admin) {
-										res.redirect('admin-view')
+										req.session.userId = req.body.email;
+										res.redirect("admin-view");
 									} else {
 										console.log("no user");
 										// alert('No User Found')
@@ -139,35 +143,34 @@ app.post("/sign-in", (req, res) => {
 	});
 });
 
-app.get('/admin-view', (req, res) => {
+app.get("/admin-view", redirectLogin, (req, res) => {
 	//how to get instructors here too?
 	Student.find({}, function (err, studentData) {
-		res.render('admin', {
-			practices: studentData,		
+		res.render("admin", {
+			practices: studentData,
 		});
 	});
-})
-
-app.get("/studentHomePage", (req, res) => {
-	Class.find({}, function (err, classData) {
-		res.render('studentHomePage', {
-			practices: classData,
-		})
-		// console.log(classData);
-	})
-})
-
-app.get("/instructorHomePage", (req, res) => {
-	Class.find({}, function (err, classData) {
-		res.render('instructorHomePage', {
-			practices: classData,
-		})
-		// console.log(classData);
-	})
 });
 
+app.get("/studentHomePage", redirectLogin, (req, res) => {
+	Class.find({}, function (err, classData) {
+		res.render("studentHomePage", {
+			practices: classData,
+		});
+		// console.log(classData);
+	});
+});
 
-app.get("/all-students", (req, res) => {
+app.get("/instructorHomePage", redirectLogin, (req, res) => {
+	Class.find({}, function (err, classData) {
+		res.render("instructorHomePage", {
+			practices: classData,
+		});
+		// console.log(classData);
+	});
+});
+
+app.get("/all-students", redirectLogin, (req, res) => {
 	Student.find({}, (err, students) => {
 		if (err) {
 			console.log(err);
@@ -177,7 +180,7 @@ app.get("/all-students", (req, res) => {
 	});
 });
 
-app.get("/all-instructors", (req, res) => {
+app.get("/all-instructors", redirectLogin, (req, res) => {
 	Instructor.find({}, (err, instructors) => {
 		if (err) {
 			console.log(err);
@@ -187,10 +190,7 @@ app.get("/all-instructors", (req, res) => {
 	});
 });
 
-
-
-
-app.get("/all-classes", (req, res) => {
+app.get("/all-classes", redirectLogin, (req, res) => {
 	Classes.find({}, (err, classes) => {
 		if (err) {
 			console.log(err);
@@ -204,7 +204,7 @@ app.get("/all-classes", (req, res) => {
 	});
 });
 
-app.get("/one-class", (req, res) => {
+app.get("/one-class", redirectLogin, (req, res) => {
 	Classes.findOne({ className: req.query.className }, (err, className) => {
 		if (err) {
 			console.log(err);
@@ -214,25 +214,34 @@ app.get("/one-class", (req, res) => {
 	});
 });
 
-app.get("/index.html", (req, res) => {
+app.post('/logout', redirectLogin,(req, res) => {
+	req.session.destroy(function (err) {
+		if (err) {
+			console.log(err);
+		} else {
+			res.redirect(__dirname + "/public/HTML/index.html");
+		}
+	});
+});
+
+
+app.get("/index.html", redirectLogin, (req, res) => {
 	res.sendFile(__dirname + "/public/HTML/index.html");
 });
 
-
-
-app.get("/studentCoursePage.html", (req, res) => {
+app.get("/studentCoursePage.html", redirectLogin, (req, res) => {
 	res.sendFile(__dirname + "/public/HTML/studentCoursePage.html");
 });
 
-app.get("/AssignmentPage.html", (req, res) => {
+app.get("/AssignmentPage.html", redirectLogin, (req, res) => {
 	res.sendFile(__dirname + "/public/HTML/AssignmentPage.html");
 });
 
-app.get("/searchClasses.html", (req, res) => {
+app.get("/searchClasses.html", redirectLogin, (req, res) => {
 	res.sendFile(__dirname + "/public/HTML/searchClasses.html");
 });
 
-app.get("/classResults", (req, res) => {
+app.get("/classResults", redirectLogin, (req, res) => {
 	Classes.findOne({ className: req.query.className }, (err, className) => {
 		if (err) {
 			console.log(err);
@@ -244,11 +253,11 @@ app.get("/classResults", (req, res) => {
 	});
 });
 
-app.get("/createCourse.html", (req, res) => {
+app.get("/createCourse.html", redirectLogin, (req, res) => {
 	res.sendFile(__dirname + "/public/HTML/createCourse.html");
 });
 
-app.post("/createClass", (req, res) => {
+app.post("/createClass", redirectLogin, (req, res) => {
 	const newClass = new Classes({
 		className: req.body.className,
 		classId: id++,
@@ -268,7 +277,7 @@ app.post("/createClass", (req, res) => {
 });
 
 //make this so that its deleting the right course and not 355 as the default
-app.get("/deleteCourse", (req, res) => {
+app.get("/deleteCourse", redirectLogin, (req, res) => {
 	Classes.deleteOne({ className: "csci 355" }, (err) => {
 		if (err) {
 			console.log(err);
@@ -280,17 +289,14 @@ app.get("/deleteCourse", (req, res) => {
 	});
 });
 
-app.get("/roster.html", (req, res) => {
+app.get("/roster.html", redirectLogin, (req, res) => {
 	res.sendFile(__dirname + "/public/HTML/roster.html");
 });
 
-
-app.get("/coursePageInstructor.html", (req, res) => {
+app.get("/coursePageInstructor.html", redirectLogin, (req, res) => {
 	res.sendFile(__dirname + "/public/HTML/coursePageInstructor.html");
 });
 
-app.get("/searchResults.html", (req, res) => {
+app.get("/searchResults.html", redirectLogin, (req, res) => {
 	res.sendFile(__dirname + "/public/HTML/searchResults.html");
 });
-
-// use passport js for user authentication
