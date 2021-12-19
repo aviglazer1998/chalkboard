@@ -241,12 +241,12 @@ app.get("/all-students", redirectLogin,(req, res) => {
 	});
 });
 
-app.get("/:id/class-search", (req,res) =>{	
+app.get("/:id/class-search", redirectLogin, (req,res) =>{	
 	res.render('searchClasses');
 
 })
 
-app.get('/:id/search-result?', (req, res) => {
+app.get('/:id/search-result?', redirectLogin, (req, res) => {
 	console.log('here');
 	const { id } = req.params;
 	Class.findOne({ where: { className: req.body.className, classId: req.body.classId, ClassInstructor: req.body.instructorName}}, (err, course) => {
@@ -266,7 +266,7 @@ app.get('/:id/search-result?', (req, res) => {
 })
 
 //this is to the student course page- when a student clicks on a class that they already have 
-app.get("/:id/one-class", (req, res) => {
+app.get("/:id/one-class",redirectLogin, (req, res) => {
 	Class.findOne({ className: req.query.className }, (err, course) => {
 		if (err) {
 			console.log(err);
@@ -334,9 +334,9 @@ app.get("/AssignmentPage.html", redirectLogin, (req, res) => {
 	res.sendFile(__dirname + "/public/HTML/AssignmentPage.html");
 });
 
-app.get("/searchClasses.html", redirectLogin, (req, res) => {
-	res.sendFile(__dirname + "/public/HTML/searchClasses.html");
-});
+// app.get("/searchClasses.html", redirectLogin, (req, res) => {
+// 	res.sendFile(__dirname + "/public/HTML/searchClasses.html");
+// });
 
 app.get("/classResults", redirectLogin, (req, res) => {
 	Classes.findOne({ className: req.query.className }, (err, className) => {
@@ -350,12 +350,12 @@ app.get("/classResults", redirectLogin, (req, res) => {
 	});
 });
 
-app.get("/createCourse.html", redirectLogin, (req, res) => {
-	res.sendFile(__dirname + "/public/HTML/createCourse.html");
+app.get("/:id/createCourse", redirectLogin, (req, res) => {
+	res.render("createCourse");
 });
 
-app.post("/createClass", redirectLogin, (req, res) => {
-	const newClass = new Classes({
+app.post("/:id/createClass", redirectLogin, (req, res) => {
+	const newClass = new Class({
 		className: req.body.className,
 		classId: id++,
 		classStartDate: req.body.classStartDate,
@@ -370,19 +370,20 @@ app.post("/createClass", redirectLogin, (req, res) => {
 	});
 	newClass.save();
 	console.log("Class Created");
-	res.sendFile(__dirname + "/public/HTML/homePageInstructor.html");
+	res.render('homePageInstructor.html');
 });
 
 //make this so that its deleting the right course and not 355 as the default
 app.get("/deleteCourse", redirectLogin, (req, res) => {
-	Classes.deleteOne({ className: "csci 355" }, (err) => {
+	Class.deleteOne({ className: "csci 355" }, (err) => {
 		if (err) {
 			console.log(err);
 		} else {
 			console.log("Class Deleted");
 		}
 
-		res.sendFile(__dirname + "/public/HTML/homePageInstructor.html");
+		// res.sendFile(__dirname + "/public/HTML/homePageInstructor.html");
+		res.render('homePageInstructor')
 	});
 });
 
@@ -394,10 +395,10 @@ app.get("/coursePageInstructor.html", redirectLogin, (req, res) => {
 	res.sendFile(__dirname + "/public/HTML/coursePageInstructor.html");
 });
 
-app.get("/searchResults.html", redirectLogin, (req, res) => {
-	res.sendFile(__dirname + "/public/HTML/searchResults.html");
-});
+// app.get("/searchResults.html", redirectLogin, (req, res) => {
+// 	res.sendFile(__dirname + "/public/HTML/searchResults.html");
+// });
 
-app.get("/homePageStudent", redirectLogin, (req, res) => {
-	res.sendFile(__dirname + "/public/HTML/homePageStudent.html");
-});
+// app.get("/homePageStudent", redirectLogin, (req, res) => {
+// 	res.sendFile(__dirname + "/public/HTML/homePageStudent.html");
+// });
