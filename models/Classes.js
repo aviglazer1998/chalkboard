@@ -13,6 +13,10 @@ const classesSchema = new Schema({
 	classCapacity: Number,
 	classLocation: String,
 	classDescription: String,
+	classStudents: [String],
+	classInstructors: [String],
+	classWaitlist: [String],
+	classWaitlistCapacity: Number,
 });
 
 const Classes = mongoose.model("Classes", classesSchema);

@@ -213,7 +213,7 @@ app.get("/one-class", redirectLogin, (req, res) => {
 	});
 });
 
-app.post('/logout', redirectLogin,(req, res) => {
+app.post("/logout", redirectLogin, (req, res) => {
 	req.session.destroy(function (err) {
 		if (err) {
 			console.log(err);
@@ -222,7 +222,6 @@ app.post('/logout', redirectLogin,(req, res) => {
 		}
 	});
 });
-
 
 app.get("/index.html", redirectLogin, (req, res) => {
 	res.sendFile(__dirname + "/public/HTML/index.html");
@@ -298,4 +297,8 @@ app.get("/coursePageInstructor.html", redirectLogin, (req, res) => {
 
 app.get("/searchResults.html", redirectLogin, (req, res) => {
 	res.sendFile(__dirname + "/public/HTML/searchResults.html");
+});
+
+app.get("/homePageStudent", redirectLogin, (req, res) => {
+	res.sendFile(__dirname + "/public/HTML/homePageStudent.html");
 });
