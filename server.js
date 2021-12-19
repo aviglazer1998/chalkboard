@@ -109,11 +109,9 @@ app.post("/sign-in", (req, res) => {
 			console.log(err);
 		} else {
 			if (instructor) {
-				req.session.userId = req.body.email;
-				console.log("id: " + instructor.id)
-				res.redirect(`${instructor.id}/instructorHomePage`)
-
-				
+				req.session.userId = instructor.id;
+				console.log("id: " + instructor.id);
+				res.redirect(`${instructor.id}/instructorHomePage`);
 			} else if (!instructor) {
 				Student.findOne({ email: req.body.email, password: req.body.password }, (err, student) => {
 					if (err) {
@@ -121,7 +119,7 @@ app.post("/sign-in", (req, res) => {
 					} else {
 						if (student) {
 							console.log("id: " + student.id);
-							req.session.userId = req.body.email;
+							req.session.userId = student.id;
 							res.redirect(`${student.id}/studentHomePage`);
 
 							// console.log("id: " + student.id)
@@ -176,62 +174,56 @@ app.get("/admin-view", redirectLogin, (req, res) => {
 // 	});
 // });
 
-
-app.get("/:studentId/studentHomePage",redirectLogin, (req, res) => {
+app.get("/:studentId/studentHomePage", redirectLogin, (req, res) => {
 	const { studentId } = req.params;
-	Student.findOne({where: {id: studentId}}, (err, student) => {
+	Student.findOne({ where: { id: studentId } }, (err, student) => {
 		const classes = student.classes;
-		Class.find({}, function (err, classData){
-			res.render('studentHomePage', {
-			// practices: null,
-			practices: classData,
-			user: student
-		})
-		})
-	})
-})
+		Class.find({}, function (err, classData) {
+			res.render("studentHomePage", {
+				// practices: null,
+				practices: classData,
+				user: student,
+			});
+		});
+	});
+});
 
-app.put("/:studentId/studentHomePage/:classId", redirectLogin, (req,res) => {
+app.put("/:studentId/studentHomePage/:classId", redirectLogin, (req, res) => {
 	const { studentId } = req.params;
 	const { classId } = req.params;
-	Class.findOne({where: {id: classId}}, (err, course) => {
-		Student.findOne({where: {id: studentId}}, (err, student) => {
+	Class.findOne({ where: { id: classId } }, (err, course) => {
+		Student.findOne({ where: { id: studentId } }, (err, student) => {
 			course.students.add(student);
 
 			course.save(function (err) {
-				if(err){
-					console.log('couldnt add course')
-					render(":studentId/studentHomePage/:classId")
-				} else{
-					console.log(course)
-					res.render(':studentId/studentHomePage/:classId', {
+				if (err) {
+					console.log("couldnt add course");
+					render(":studentId/studentHomePage/:classId");
+				} else {
+					console.log(course);
+					res.render(":studentId/studentHomePage/:classId", {
 						user: student,
-						course: course
-					})
+						course: course,
+					});
 				}
-			})
-		})
-	
-	})
-
-
-})
-
-app.get("/:instructorId/instructorHomePage",redirectLogin , (req, res) => {
-	const { instructorId } = req.params;
-	Instructor.findOne({where: {id: instructorId}}, (err, instructor) => {
-			res.render('instructorHomePage', {
-			practices: null,
-			// practices: classData,
-			user: instructor
-		})
-	})
+			});
+		});
+	});
 });
 
-
+app.get("/:instructorId/instructorHomePage", redirectLogin, (req, res) => {
+	const { instructorId } = req.params;
+	Instructor.findOne({ where: { id: instructorId } }, (err, instructor) => {
+		res.render("instructorHomePage", {
+			practices: null,
+			// practices: classData,
+			user: instructor,
+		});
+	});
+});
 
 // app.get("/all-students", redirectLogin, (req, res) => {
-app.get("/all-students", redirectLogin,(req, res) => {
+app.get("/all-students", redirectLogin, (req, res) => {
 	Student.find({}, (err, students) => {
 		if (err) {
 			console.log(err);
@@ -249,21 +241,23 @@ app.get("/:id/class-search", redirectLogin, (req,res) =>{
 app.get('/:id/search-result?', redirectLogin, (req, res) => {
 	console.log('here');
 	const { id } = req.params;
-	Class.findOne({ where: { className: req.body.className, classId: req.body.classId, ClassInstructor: req.body.instructorName}}, (err, course) => {
-		if (course) {
-			// course.instructors[0] = course.ClassInstructor
-			//FOR SOME REASON THE INSTRUCTOR NAME DOESNT SHOW UP
-			console.log(course.id)
-			res.render('searchResults', {
-				course: course,
-				id: id
-			})
-			
-		}else {
-			res.redirect('searchClasses')
+	Class.findOne(
+		{ where: { className: req.body.className, classId: req.body.classId, ClassInstructor: req.body.instructorName } },
+		(err, course) => {
+			if (course) {
+				// course.instructors[0] = course.ClassInstructor
+				//FOR SOME REASON THE INSTRUCTOR NAME DOESNT SHOW UP
+				console.log(course.id);
+				res.render("searchResults", {
+					course: course,
+					id: id,
+				});
+			} else {
+				res.redirect("searchClasses");
+			}
 		}
-})
-})
+	);
+});
 
 //this is to the student course page- when a student clicks on a class that they already have 
 app.get("/:id/one-class",redirectLogin, (req, res) => {
@@ -271,9 +265,9 @@ app.get("/:id/one-class",redirectLogin, (req, res) => {
 		if (err) {
 			console.log(err);
 		} else {
-			res.render('studentCoursePage', {
-				course: course
-			})
+			res.render("studentCoursePage", {
+				course: course,
+			});
 		}
 	});
 });
