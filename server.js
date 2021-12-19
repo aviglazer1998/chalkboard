@@ -37,7 +37,6 @@ app.listen(() => {
 });
 
 const redirectLogin = (req, res, next) => {
-	console.log(req.session.userId);
 	if (!req.session.userId) {
 		res.redirect("/");
 		console.log("redirected");
