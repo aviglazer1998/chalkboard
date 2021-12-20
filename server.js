@@ -62,7 +62,8 @@ const redirectHome = (req, res, next) => {
 };
 
 app.get('/', (request, response) => {
-  response.sendFile(__dirname + '/public/HTML/index.html');
+  //   response.sendFile(__dirname + '/public/HTML/index.html');
+  response.render('index');
 });
 
 app.post('/sign-up', (req, res) => {
@@ -77,7 +78,8 @@ app.post('/sign-up', (req, res) => {
       classes: [],
     });
     instructor.save();
-    res.sendFile(__dirname + '/public/HTML/index.html');
+    // res.sendFile(__dirname + '/public/HTML/index.html');
+    res.render('index');
   } else {
     console.log('is student');
     const student = new Student({
@@ -89,7 +91,8 @@ app.post('/sign-up', (req, res) => {
       classes: [],
     });
     student.save();
-    res.sendFile(__dirname + '/public/HTML/index.html');
+    // res.sendFile(__dirname + '/public/HTML/index.html');
+    res.render('index');
   }
 });
 
@@ -131,9 +134,10 @@ app.post('/sign-in', (req, res) => {
                         } else {
                           console.log('no user');
                           // alert('No User Found')
-                          return res.render(
-                            __dirname + '/public/HTML/index.html'
-                          );
+                          //   return res.render(
+                          //     __dirname + '/public/HTML/index.html'
+                          //   );
+                          return res.render('index');
                         }
                       }
                     }
@@ -320,7 +324,8 @@ app.get('/:id/logout', redirectLogin, (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      res.redirect(__dirname + '/public/HTML/index.html');
+      //   res.redirect(__dirname + '/public/HTML/index.html');
+      res.redirect('index');
     }
   });
 });
@@ -330,13 +335,13 @@ app.get('/logout', redirectLogin, (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      res.redirect('index.html');
+      res.redirect('index');
     }
   });
 });
 
-app.get('/:id/index.html', redirectLogin, (req, res) => {
-  res.sendFile(__dirname + '/public/HTML/index.html');
+app.get('/:id/index', redirectLogin, (req, res) => {
+  res.sendFile('index');
 });
 
 app.get('/:id/instructorCoursePage/:courseId', redirectLogin, (req, res) => {

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Chalkboard Sign Up</title>
+    <link rel="stylesheet" href="../CSS/index.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cabin:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="../JS/index.js"></script>
+  </head>
+
+  <style>
+    /* Popup container */
+    .popup {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+    }
+
+    /* The actual popup (appears on top) */
+    .popup .popuptext {
+      visibility: hidden;
+      width: 160px;
+      background-color: #555;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 8px 0;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      margin-left: -80px;
+    }
+
+    /* Popup arrow */
+    .popup .popuptext::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: #555 transparent transparent transparent;
+    }
+
+    /* Toggle this class when clicking on the popup container (hide and show the popup) */
+    .popup .show {
+      visibility: visible;
+      -webkit-animation: fadeIn 1s;
+      animation: fadeIn 1s;
+    }
+
+    /* Add animation (fade in the popup) */
+    @-webkit-keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+  <script>
+    // When the user clicks on <div>, open the popup
+    function myFunction() {
+      if (
+        document.getElementById('student-email').value == '' ||
+        document.getElementById('student-password').value == '' ||
+        document.getElementById('student-first-name').value == '' ||
+        document.getElementById('student-last-name').value == ''
+      ) {
+        alert('Please fill in all fields');
+      } else {
+        alert('You have successfully signed up!');
+      }
+    }
+  </script>
+
+  <body>
+    <header>
+      <img
+        id="logo"
+        src="../Images/chalkboard-logo.png"
+        alt="chalkboard Logo"
+      />
+      <h2>Some Line About Remote Learning and How Great it is</h2>
+      <hr />
+    </header>
+    <div class="page">
+      <form class="signin-container" method="POST" action="/sign-in">
+        <div class="container input">
+          <h3>Sign in to your account</h3>
+          <label for="uname">Email Address</label>
+          <br />
+          <input
+            type="text"
+            placeholder="Enter Email"
+            name="email"
+            id="uname"
+            required
+          />
+          <br />
+          <label for="passw">Password</label>
+          <br />
+          <input
+            type="password"
+            placeholder="Enter Password"
+            name="password"
+            id="passw"
+            required
+          />
+          <br />
+          <input type="submit" value="Sign In" />
+        </div>
+      </form>
+
+      <div class="verticalLine"></div>
+
+      <div class="signup-container">
+        <div class="container">
+          <h3>Create an account</h3>
+
+          <div class="input">
+            <form action="/sign-up" method="POST">
+              <div class="checkboxes">
+                <div class="check">
+                  <input
+                    type="checkbox"
+                    id="1"
+                    name="box"
+                    class="boxes"
+                    onclick="onlyOne(this.id)"
+                  />
+                  <label for="student-box">Sign up as a student</label>
+                </div>
+
+                <div class="check">
+                  <input
+                    type="checkbox"
+                    id="2"
+                    class="boxes"
+                    onclick="onlyOne(this.id)"
+                  />
+                  <label for="instructor-box">Sign up as an instructor</label>
+                </div>
+              </div>
+
+              <label for="first-name">First Name</label>
+              <br />
+              <input
+                type="text"
+                placeholder="Enter First Name"
+                id="student-first-name"
+                name="firstName"
+                required
+              />
+              <br />
+              <label for="last-name">Last Name</label>
+              <br />
+              <input
+                type="text"
+                placeholder="Enter Last Name"
+                id="student-last-name"
+                name="lastName"
+                required
+              />
+              <br />
+              <label for="email">Email Address</label>
+              <br />
+              <input
+                type="email"
+                placeholder="Enter Email for Username"
+                id="student-email"
+                name="email"
+                required
+              />
+              <br />
+              <label for="password">Password</label>
+              <br />
+              <input
+                type="password"
+                placeholder="Enter New Password"
+                id="student-password"
+                name="password"
+                required
+              />
+              <br />
+              <div class="popup" onclick="myFunction()">
+                <input type="submit" value="Sign Up" />
+              </div>
+            </form>
+            <br />
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
