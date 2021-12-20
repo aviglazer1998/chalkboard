@@ -137,7 +137,12 @@ app.post('/sign-in', (req, res) => {
                           //   return res.render(
                           //     __dirname + '/public/HTML/index.html'
                           //   );
-                          return res.render('index');
+
+                          res
+                            .status(500)
+                            .send(
+                              'Incorrect Login! Please go back and try again.'
+                            );
                         }
                       }
                     }
