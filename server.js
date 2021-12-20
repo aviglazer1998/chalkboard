@@ -443,5 +443,13 @@ app.get('/deleteCourse', redirectLogin, (req, res) => {
 });
 
 app.get('/:id/roster', redirectLogin, (req, res) => {
-  res.render('roster');
+  const { id } = req.params;
+  Instructor.findOne({ where: { id: id } }, (err, instructor) => {
+    Class.find({}, (err, classes) => {
+      res.render('roster', {
+        user: instructor,
+        classes: classes,
+      });
+    });
+  });
 });
