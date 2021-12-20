@@ -1,0 +1,14 @@
+<% instructors.forEach( function (instructor) {%> <%
+if(course.classInstructors.includes(instructor.id)){%>
+<div class="instructor-btn">
+  <input
+    type="button"
+    class="instructor-waitlist"
+    value="Remove Instructor"
+    id="teacher"
+  />
+  <label for="teacher"
+    ><%= instructor.firstName %> <%= instructor.lastName %></label
+  >
+</div>
+<% }%> <%}) %>
