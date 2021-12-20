@@ -7,6 +7,7 @@ const Student = require('./models/Students');
 const Instructor = require('./models/Instructor');
 const Admin = require('./models/Admin');
 const Class = require('./models/Classes');
+const Classes = require('./models/Classes');
 
 var id = 0;
 app.set('view engine', 'ejs');
@@ -197,10 +198,12 @@ app.put('/:studentId/studentHomePage/:classId', redirectLogin, (req, res) => {
 app.get('/:instructorId/instructorHomePage', redirectLogin, (req, res) => {
   const { instructorId } = req.params;
   Instructor.findOne({ where: { id: instructorId } }, (err, instructor) => {
-    res.render('instructorHomePage', {
-      practices: null,
-      // practices: classData,
-      user: instructor,
+    Classes.find({}, (err, classes) => {
+      res.render('instructorHomePage', {
+        classes: classes,
+        // practices: classData,
+        user: instructor,
+      });
     });
   });
 });
@@ -336,6 +339,21 @@ app.get('/:id/index.html', redirectLogin, (req, res) => {
   res.sendFile(__dirname + '/public/HTML/index.html');
 });
 
+app.get('/:id/instructorCoursePage/:courseId', redirectLogin, (req, res) => {
+  const { courseId } = req.params;
+  console.log(courseId);
+
+  Class.findOne({ where: { classId: courseId } }, (err, course) => {
+    Instructor.find({}, (err, instructors) => {
+      res.render('instructorCoursePage', {
+        course: course,
+        instructors: instructors,
+      });
+    });
+    // console.log(course);
+  });
+});
+
 app.get('/:id/studentCoursePage/:courseId', redirectLogin, (req, res) => {
   const { courseId } = req.params;
   console.log(courseId);
@@ -421,8 +439,4 @@ app.get('/deleteCourse', redirectLogin, (req, res) => {
 
 app.get('/:id/roster', redirectLogin, (req, res) => {
   res.render('roster');
-});
-
-app.get('/:id/coursePageInstructor', redirectLogin, (req, res) => {
-  res.render('instructorCoursePage');
 });

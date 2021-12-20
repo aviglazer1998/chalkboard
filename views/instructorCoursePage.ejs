@@ -7,7 +7,7 @@
 			integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 			crossorigin="anonymous"
 		/>
-		<link rel="stylesheet" href="../CSS/coursePageInstructor.css" />
+		<link rel="stylesheet" href="/CSS/coursePageInstructor.css" />
 		<link href="https://fonts.googleapis.com/css2?family=Cabin:ital@0;1&display=swap" rel="stylesheet" />
 
 		<title>Instructor Course Page</title>
@@ -19,9 +19,9 @@
 		<div class="header">
 			<div class="topnav">
 				<a class="active" href="instructorHomePage">
-					<img id="logo" src="../Images/chalkboard-logo.png" alt="chalkboard Logo" />
+					<img id="logo" src="/Images/chalkboard-logo.png" alt="chalkboard Logo" />
 				</a>
-				<a href="../HTML/roster.html">Roster</a>
+				<a href="roster">Roster</a>
 				<a href="#waitlist">Waitlist</a>
 				<a href="#description">Description</a>
 				<a href="#assignment">Assignments</a>
@@ -30,25 +30,18 @@
 					<a class="nav-item" href="logout">Sign Out</a>
 				</div>
 			</div>
-			<h1>Course Name</h1>
-			<p>Course ID</p>
+			<h1><%= course.className %></h1>
+			<!-- <p>Course ID</p> -->
 		</div>
 		<hr />
 
 		<div class="container instructors">
 			<h2>Instructors</h2>
 			<div class="buttons">
-				<input type="button" class="instructor-waitlist" value="Remove" id="teacher-1" />
-				<label for="teacher-1">Teacher 1</label>
-				<br />
-				<input type="button" class="instructor-waitlist" value="Remove" id="teacher-2" />
-				<label for="teacher-2">Teacher 2</label>
-				<br />
-				<input type="button" class="instructor-waitlist" value="Remove" id="teacher-3" />
-				<label for="teacher-3">Teacher 3</label>
-				<br />
+				<%- include ('./partials/removeInstructor.ejs') %> 
 				<input type="button" class="instructor-waitlist" value="Add New Instructor" id="teacher-3" />
 			</div>
+			
 		</div>
 		<hr />
 
