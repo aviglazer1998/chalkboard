@@ -1,17 +1,15 @@
 <!-- need to put a for each so that we have all the instructors that are teach this class -->
-<% instructors.forEach( function (instructor) {%> <%
-if(course.classInstructors.includes(instructor.id)){%>
+<script>
+	function myFunction() {
+		alert('You have joined the waitlist!');
+	}
+</script>
+
+<% instructors.forEach( function (instructor) {%> <% if(course.classInstructors.includes(instructor.id)){%>
 <div class="instructor-btn">
-  <form action="studentHomePage/<%= course.id%>" method="PUT">
-    <input
-      type="submit"
-      class="instructor-waitlist"
-      value="Join Waitlist"
-      id="teacher"
-    />
-    <label for="teacher"
-      ><%= instructor.firstName %> <%= instructor.lastName %>
-    </label>
-  </form>
+	<form action="studentHomePage/<%= course.id%>" method="PUT">
+		<input type="submit" class="instructor-waitlist" value="Join Waitlist" id="teacher" onclick="myFunction()" />
+		<label for="teacher"><%= instructor.firstName %> <%= instructor.lastName %> </label>
+	</form>
 </div>
 <% }%> <%}) %>
