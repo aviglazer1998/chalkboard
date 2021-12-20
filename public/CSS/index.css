@@ -35,17 +35,14 @@ h1 {
   font-size: 20px;
 }
 
-.checkboxes {
-  display: block;
-  padding-bottom: 10px;
-  font-size: 15px;
-}
 input {
   margin: 5px;
   padding: 10px;
   /* width: 200px; */
 }
-.input input {
+.input input[type='text'],
+input[type='email'],
+input[type='password'] {
   width: 300px;
   padding: 10px;
   font-size: 15px;
@@ -54,7 +51,12 @@ input {
 .input label {
   padding: 5px;
 }
-
+.checkboxes {
+  display: flex;
+  padding-bottom: 10px;
+  font-size: 15px;
+  /* width: 10px; */
+}
 button {
   background-color: #0476aa;
   color: white;

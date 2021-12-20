@@ -1,0 +1,20 @@
+<% classes.forEach(function (course) { %>
+<%if(course.classInstructors.includes(user.id)){%>
+<div id="class">
+  <h2><%= course.className %></h2>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Grade</th>
+      <th>Year</th>
+    </tr>
+    <% course.classStudents.forEach(function (student){%>
+    <tr>
+      <td><%= student.firstName %> <%= student.lastName%></td>
+      <td>83.45</td>
+      <td>Sophmore</td>
+    </tr>
+    <%}) %>
+  </table>
+</div>
+<% } %> <%}) %>

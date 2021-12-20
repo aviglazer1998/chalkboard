@@ -1,20 +1,15 @@
-<% if(practices) { %>
-    <% practices.forEach(function (practice) { %>
-        <div class="class">
-            <a href="coursePage.html"
-              ><div class="container">
-                <h2> <%= practice.className %></h2>
-                <div class="class-info">
-                  <b><%= practice.classId %></b>
-                  <br />
-                  <%= practice.ClassInstructor %>
-                </div>
-              </div></a
-            >
-          </div>
-      <% }) %>
-<% } else{ %>
-    <div>
-        <h3><%= user.firstName %> doesn't have any classes right now!</h3>
+<% if(classes){%> <% classes.forEach(function (course) {%> <%
+if(course.classInstructors.includes(user.id)){%>
+<div class="class">
+  <a href="instructorCoursePage/<%= course.id %>"
+    ><div class="container">
+      <h2><%= course.className %></h2>
+      <div class="class-info">
+        <%= course.classLocation %>
+        <br />
+        <%= user.firstName %> <%= user.lastName %>
+      </div>
     </div>
-<%}%>
+  </a>
+</div>
+<% } %> <% })%> <%} %>

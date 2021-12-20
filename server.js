@@ -7,6 +7,7 @@ const Student = require('./models/Students');
 const Instructor = require('./models/Instructor');
 const Admin = require('./models/Admin');
 const Class = require('./models/Classes');
+const Classes = require('./models/Classes');
 
 var id = 0;
 app.set('view engine', 'ejs');
@@ -60,7 +61,8 @@ const redirectHome = (req, res, next) => {
 };
 
 app.get('/', (request, response) => {
-	response.sendFile(__dirname + '/public/HTML/index.html');
+	//   response.sendFile(__dirname + '/public/HTML/index.html');
+	response.render('index');
 });
 
 app.post('/sign-up', (req, res) => {
@@ -75,7 +77,8 @@ app.post('/sign-up', (req, res) => {
 			classes: [],
 		});
 		instructor.save();
-		res.sendFile(__dirname + '/public/HTML/index.html');
+		// res.sendFile(__dirname + '/public/HTML/index.html');
+		res.render('index');
 	} else {
 		console.log('is student');
 		const student = new Student({
@@ -87,7 +90,8 @@ app.post('/sign-up', (req, res) => {
 			classes: [],
 		});
 		student.save();
-		res.sendFile(__dirname + '/public/HTML/index.html');
+		// res.sendFile(__dirname + '/public/HTML/index.html');
+		res.render('index');
 	}
 });
 
@@ -123,6 +127,10 @@ app.post('/sign-in', (req, res) => {
 									} else {
 										console.log('no user');
 										// alert('No User Found')
+										//   return res.render(
+										//     __dirname + '/public/HTML/index.html'
+										//   );
+
 										res.status(500).send('Incorrect Login! Please go back and try again.');
 									}
 								}
@@ -147,8 +155,9 @@ app.get('/admin-view', redirectLogin, (req, res) => {
 app.get('/:studentId/studentHomePage', redirectLogin, (req, res) => {
 	const { studentId } = req.params;
 	Student.findOne({ where: { id: studentId } }, (err, student) => {
-		const classes = student.classes;
-		Class.find({}, function (err, classData) {
+		// const classes = student.classes;
+		// console.log(classes);
+		Class.find({ classStudents: student }, function (err, classData) {
 			res.render('studentHomePage', {
 				// practices: null,
 				practices: classData,
@@ -184,10 +193,12 @@ app.put('/:studentId/studentHomePage/:classId', redirectLogin, (req, res) => {
 app.get('/:instructorId/instructorHomePage', redirectLogin, (req, res) => {
 	const { instructorId } = req.params;
 	Instructor.findOne({ where: { id: instructorId } }, (err, instructor) => {
-		res.render('instructorHomePage', {
-			practices: null,
-			// practices: classData,
-			user: instructor,
+		Classes.find({}, (err, classes) => {
+			res.render('instructorHomePage', {
+				classes: classes,
+				// practices: classData,
+				user: instructor,
+			});
 		});
 	});
 });
@@ -208,26 +219,30 @@ app.get('/:id/class-search', redirectLogin, (req, res) => {
 });
 
 app.get('/:id/search-result?', redirectLogin, (req, res) => {
-	console.log('in search result');
-	//   console.log(req.body.className);
-	console.log(req.body);
 	const { id } = req.params;
 	Class.findOne(
 		{
 			where: {
 				className: req.body.className,
-				// classId: req.body.classId,
-				// ClassInstructor: req.body.instructorName,
 			},
 		},
 		(err, course) => {
 			if (course) {
-				// course.instructors[0] = course.ClassInstructor
-				//FOR SOME REASON THE INSTRUCTOR NAME DOESNT SHOW UP
-				console.log(course.id);
-				res.render('searchResults', {
-					course: course,
-					id: id,
+				const array = course.classInstructors;
+				const newArray = [];
+				array.forEach(function (instructor) {
+					Instructor.findOne({ where: { id: instructor.id } }, (err, i) => {
+						// console.log(i);
+						newArray.push(i);
+						// console.log(newArray);
+					});
+				});
+				Instructor.find({}, (err, instructors) => {
+					res.render('searchResults', {
+						course: course,
+						id: id,
+						instructors: instructors,
+					});
 				});
 			} else {
 				res.redirect('searchClasses');
@@ -242,8 +257,6 @@ app.get('/:id/class-search-student', redirectLogin, (req, res) => {
 
 app.get('/:id/search-result-student?', redirectLogin, (req, res) => {
 	console.log('in search result');
-	//   console.log(req.body.className);
-	console.log(req.body);
 	const { id } = req.params;
 	Class.findOne(
 		{
@@ -255,12 +268,13 @@ app.get('/:id/search-result-student?', redirectLogin, (req, res) => {
 		},
 		(err, course) => {
 			if (course) {
-				// course.instructors[0] = course.ClassInstructor
-				//FOR SOME REASON THE INSTRUCTOR NAME DOESNT SHOW UP
-				console.log(course.id);
-				res.render('studentSearchResult', {
-					course: course,
-					id: id,
+				const instructorId = course.classInstructors[0];
+				Instructor.findOne({ where: { id: instructorId } }, (err, instructor) => {
+					res.render('studentSearchResult', {
+						course: course,
+						user: instructor,
+						id: id,
+					});
 				});
 			} else {
 				res.redirect('studentSearchClasses');
@@ -298,7 +312,8 @@ app.get('/:id/logout', redirectLogin, (req, res) => {
 		if (err) {
 			console.log(err);
 		} else {
-			res.redirect(__dirname + '/public/HTML/index.html');
+			//   res.redirect(__dirname + '/public/HTML/index.html');
+			res.redirect('index');
 		}
 	});
 });
@@ -308,13 +323,28 @@ app.get('/logout', redirectLogin, (req, res) => {
 		if (err) {
 			console.log(err);
 		} else {
-			res.redirect(__dirname + '/public/HTML/index.html');
+			res.redirect('index');
 		}
 	});
 });
 
-app.get('/:id/index.html', redirectLogin, (req, res) => {
-	res.sendFile(__dirname + '/public/HTML/index.html');
+app.get('/:id/index', redirectLogin, (req, res) => {
+	res.sendFile('index');
+});
+
+app.get('/:id/instructorCoursePage/:courseId', redirectLogin, (req, res) => {
+	const { courseId } = req.params;
+	console.log(courseId);
+
+	Class.findOne({ where: { classId: courseId } }, (err, course) => {
+		Instructor.find({}, (err, instructors) => {
+			res.render('instructorCoursePage', {
+				course: course,
+				instructors: instructors,
+			});
+		});
+		// console.log(course);
+	});
 });
 
 app.get('/:id/studentCoursePage/:courseId', redirectLogin, (req, res) => {
@@ -401,9 +431,13 @@ app.get('/deleteCourse', redirectLogin, (req, res) => {
 });
 
 app.get('/:id/roster', redirectLogin, (req, res) => {
-	res.render('roster');
-});
-
-app.get('/:id/coursePageInstructor', redirectLogin, (req, res) => {
-	res.render('instructorCoursePage');
+	const { id } = req.params;
+	Instructor.findOne({ where: { id: id } }, (err, instructor) => {
+		Class.find({}, (err, classes) => {
+			res.render('roster', {
+				user: instructor,
+				classes: classes,
+			});
+		});
+	});
 });

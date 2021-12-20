@@ -1,0 +1,12 @@
+<% if(course.classWaitlist.length == 1) { %> 
+    <% course.classWaitlist.forEach(function (student){%>
+<input type="button" class="student-waitlist check" value="&#10003" id="student" />
+				<input type="button" class="student-waitlist x" value="&times" id="student" />
+				<label for="student"><%= student.firstName %> <%= student.lastName  %> </label>
+				<br />
+  <%  }) %> 
+<%} else{%>
+<div>
+  <p>Waitlist is empty</p>
+</div>
+<%} %>
