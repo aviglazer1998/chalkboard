@@ -330,7 +330,7 @@ app.get('/logout', redirectLogin, (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      res.redirect(__dirname + '/public/HTML/index.html');
+      res.redirect('index.html');
     }
   });
 });
