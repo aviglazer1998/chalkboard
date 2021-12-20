@@ -1,15 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="stylesheet" href="../CSS/searchClass.css" />
+    <link rel="stylesheet" href="/CSS/searchClass.css" />
     <title>Class Search</title>
   </head>
   <a class="active" href="studentHomePage">
-    <img
-      id="banner"
-      src="../Images/chalkboard-logo.png"
-      alt="chalkboard Logo"
-    />
+    <img id="banner" src="/Images/chalkboard-logo.png" alt="chalkboard Logo" />
   </a>
 
   <div class=".top-nav" style="float: right !important">
@@ -23,7 +19,7 @@
 
   <div>
     <header>Search for classes</header>
-    <form method="GET" action="search-result-student">
+    <form method="POST" action="search-result-student">
       <label for="className">Class Name:</label>
       <input type="text" id="className" name="className" /><br />
       <!-- <label for="classId">Class ID:</label>

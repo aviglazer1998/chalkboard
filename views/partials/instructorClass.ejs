@@ -12,4 +12,8 @@ if(course.classInstructors.includes(user.id)){%>
     </div>
   </a>
 </div>
-<% } %> <% })%> <%} %>
+<% } %> <% })%> <%} else {%>
+<div>
+  <h3><%= user.firstName %> has no classes</h3>
+</div>
+<%} %>

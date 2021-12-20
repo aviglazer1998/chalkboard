@@ -47,6 +47,11 @@ input[type='password'] {
   padding: 10px;
   font-size: 15px;
 }
+input[type='submit'] {
+  width: 324px;
+  padding: 10px;
+  font-size: 15px;
+}
 
 .input label {
   padding: 5px;
