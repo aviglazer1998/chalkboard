@@ -18,18 +18,17 @@
     <!-- <img id="banner" src="../Images/chalkboardLogo.png" alt="chalkboard Logo" /> -->
     <div class="header">
       <div class="topnav">
-        <a class="active" href="homePageStudent.html">
+        <a class="active" href="studentHomePage">
           <img
             id="logo"
             src="../Images/chalkboard-logo.png"
             alt="chalkboard Logo"
           />
         </a>
-        <a href="class-search" class="">Search for a New Class</a>
-    
+        <a href="class-search-student" class="">Search for a New Class</a>
 
         <div class="navbar-right" style="float: right !important">
-          <a class="nav-item" href="./index.html">Sign Out</a>
+          <a class="nav-item" href="logout">Sign Out</a>
         </div>
       </div>
 
@@ -41,8 +40,8 @@
     <div class="all-classes">
       <!-- make each class with a border around and when you click the 
         class then bring you to the course page for that class-->
-        
-        <%- include ('./partials/studentClass.ejs') %> 
+
+      <%- include ('./partials/studentClass.ejs') %>
     </div>
   </body>
 </html>

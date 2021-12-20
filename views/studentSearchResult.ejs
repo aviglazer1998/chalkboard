@@ -22,7 +22,7 @@
     <div class="course-container">
       <div class="header">
         <div class="topnav">
-          <a class="active" href="instructorHomePage">
+          <a class="active" href="studentHomePage">
             <img
               id="logo"
               src="../Images/chalkboard-logo.png"
@@ -44,41 +44,10 @@
       <hr />
 
       <div class="instructor-list" id="instructors">
-        <h2>Instructors</h2>
-
-        <div class="instructor-btn">
-          <input
-            type="button"
-            class="instructor-waitlist"
-            value="Remove Instructor"
-            id="teacher-1"
-          />
-          <label for="teacher-1">Teacher 1</label>
-        </div>
-        <div class="instructor-btn">
-          <input
-            type="button"
-            class="instructor-waitlist"
-            value="Remove Instructor"
-            id="teacher-2"
-          />
-          <label for="teacher-2">Teacher 2</label>
-        </div>
-        <div class="instructor-btn">
-          <input
-            type="button"
-            class="instructor-waitlist"
-            value="Remove Instructor"
-            id="teacher-3"
-          />
-          <label for="teacher-3">Teacher 3</label>
-        </div>
-
-        <input
-          type="button"
-          class="instructor-waitlist"
-          value="Join Instructor List"
-        />
+        <h2>Choose Instructor</h2>
+        <!-- NEED TO FIGURE OUT HOW TO ADD TO WAITLIST FOR INSTRUCTOR -->
+        <!-- ALSO NEED TO FIGURE OUT WHY ITS NOT READING THE INSTRUCTORS NAME -->
+        <%- include ('./partials/instructors.ejs') %>
       </div>
       <br />
       <hr />

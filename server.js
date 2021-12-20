@@ -77,18 +77,6 @@ app.post('/sign-up', (req, res) => {
     });
     instructor.save();
     res.sendFile(__dirname + '/public/HTML/index.html');
-    // Instructor.register(new Instructor({ email: email }),
-    //     password, function (err, user) {
-    // if (err) {
-    //     console.log(err);
-    //     return res.sendFile(__dirname + "/public/HTML/index.html");
-    // }
-
-    // passport.authenticate("local")(
-    //     req, res, function () {
-    //     res.render("instructorHomePage");
-    // });
-    // });
   } else {
     console.log('is student');
     const student = new Student({
@@ -142,7 +130,7 @@ app.post('/sign-in', (req, res) => {
                         } else {
                           console.log('no user');
                           // alert('No User Found')
-                          return res.redirect(
+                          return res.render(
                             __dirname + '/public/HTML/index.html'
                           );
                         }
@@ -167,24 +155,6 @@ app.get('/admin-view', redirectLogin, (req, res) => {
     });
   });
 });
-
-// app.get("/studentHomePage", redirectLogin, (req, res) => {
-// 	Class.find({}, function (err, classData) {
-// 		res.render("studentHomePage", {
-// 			practices: classData,
-// 		});
-// 		// console.log(classData);
-// 	});
-// });
-
-// app.get("/instructorHomePage", redirectLogin, (req, res) => {
-// 	Class.find({}, function (err, classData) {
-// 		res.render("instructorHomePage", {
-// 			practices: classData,
-// 		});
-// 		// console.log(classData);
-// 	});
-// });
 
 app.get('/:studentId/studentHomePage', redirectLogin, (req, res) => {
   const { studentId } = req.params;
@@ -250,14 +220,16 @@ app.get('/:id/class-search', redirectLogin, (req, res) => {
 });
 
 app.get('/:id/search-result?', redirectLogin, (req, res) => {
-  console.log('here');
+  console.log('in search result');
+  //   console.log(req.body.className);
+  console.log(req.body);
   const { id } = req.params;
   Class.findOne(
     {
       where: {
         className: req.body.className,
-        classId: req.body.classId,
-        ClassInstructor: req.body.instructorName,
+        // classId: req.body.classId,
+        // ClassInstructor: req.body.instructorName,
       },
     },
     (err, course) => {
@@ -276,17 +248,37 @@ app.get('/:id/search-result?', redirectLogin, (req, res) => {
   );
 });
 
-//this is to the student course page- when a student clicks on a class that they already have
-app.get('/:id/one-class', redirectLogin, (req, res) => {
-  Class.findOne({ className: req.query.className }, (err, course) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.render('studentCoursePage', {
-        course: course,
-      });
+app.get('/:id/class-search-student', redirectLogin, (req, res) => {
+  res.render('studentSearchClasses');
+});
+
+app.get('/:id/search-result-student?', redirectLogin, (req, res) => {
+  console.log('in search result');
+  //   console.log(req.body.className);
+  console.log(req.body);
+  const { id } = req.params;
+  Class.findOne(
+    {
+      where: {
+        className: req.body.className,
+        // classId: req.body.classId,
+        // ClassInstructor: req.body.instructorName,
+      },
+    },
+    (err, course) => {
+      if (course) {
+        // course.instructors[0] = course.ClassInstructor
+        //FOR SOME REASON THE INSTRUCTOR NAME DOESNT SHOW UP
+        console.log(course.id);
+        res.render('studentSearchResult', {
+          course: course,
+          id: id,
+        });
+      } else {
+        res.redirect('studentSearchClasses');
+      }
     }
-  });
+  );
 });
 
 app.get('/all-instructors', redirectLogin, (req, res) => {
@@ -313,17 +305,7 @@ app.get('/all-classes', redirectLogin, (req, res) => {
   });
 });
 
-app.get('/:id/one-class', redirectLogin, (req, res) => {
-  Class.findOne({ className: req.query.className }, (err, className) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.send(className);
-    }
-  });
-});
-
-app.post('/logout', redirectLogin, (req, res) => {
+app.get('/:id/logout', redirectLogin, (req, res) => {
   req.session.destroy(function (err) {
     if (err) {
       console.log(err);
@@ -333,24 +315,38 @@ app.post('/logout', redirectLogin, (req, res) => {
   });
 });
 
-app.get('/index.html', redirectLogin, (req, res) => {
+app.get('/logout', redirectLogin, (req, res) => {
+  req.session.destroy(function (err) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.redirect(__dirname + '/public/HTML/index.html');
+    }
+  });
+});
+
+app.get('/:id/index.html', redirectLogin, (req, res) => {
   res.sendFile(__dirname + '/public/HTML/index.html');
 });
 
-app.get('/:id/studentCoursePage', redirectLogin, (req, res) => {
-  res.render('studentCoursePage');
+app.get('/:id/studentCoursePage/:courseId', redirectLogin, (req, res) => {
+  const { courseId } = req.params;
+  console.log(courseId);
+  Class.findOne({ where: { classId: courseId } }, (err, course) => {
+    console.log(course);
+    res.render('studentCoursePage', {
+      course: course,
+    });
+  });
+  //   res.render('studentCoursePage');
 });
 
 app.get('/:id/assignmentPage', redirectLogin, (req, res) => {
   res.render('assignmentPage');
 });
 
-// app.get("/searchClasses.html", redirectLogin, (req, res) => {
-// 	res.sendFile(__dirname + "/public/HTML/searchClasses.html");
-// });
-
 app.get('/classResults', redirectLogin, (req, res) => {
-  Classes.findOne({ className: req.query.className }, (err, className) => {
+  Class.findOne({ className: req.query.className }, (err, className) => {
     if (err) {
       console.log(err);
       console.log('no class');
@@ -362,26 +358,44 @@ app.get('/classResults', redirectLogin, (req, res) => {
 });
 
 app.get('/:id/createCourse', redirectLogin, (req, res) => {
-  res.render('createCourse');
+  const { id } = req.params;
+  Instructor.findOne({ where: { id: id } }, (err, instructor) => {
+    console.log(instructor);
+    res.render('createCourse', {
+      instructor: instructor,
+    });
+  });
+  //   console.log('create course');
 });
 
-app.post('/:id/createClass', redirectLogin, (req, res) => {
-  const newClass = new Class({
-    className: req.body.className,
-    classId: id++,
-    classStartDate: req.body.classStartDate,
-    classEndDate: req.body.classEndDate,
-    classStartTime: req.body.classStartTime,
-    classEndTime: req.body.classEndTime,
-    classDays: req.body.classDays,
-    classInstructor: req.body.classInstructor,
-    classCapacity: req.body.classCapacity,
-    classLocation: req.body.classLocation,
-    classDescription: req.body.classDescription,
+app.post('/:id/createCourse', redirectLogin, (req, res) => {
+  console.log('in create course');
+  const { id } = req.params;
+  console.log(id);
+  Instructor.findOne({ where: { id: id } }, (err, instructor) => {
+    const newClass = new Class({
+      className: req.body.className,
+      // classId: ,
+      classStartDate: req.body.classStartDate,
+      classEndDate: req.body.classEndDate,
+      classStartTime: req.body.classStartTime,
+      classEndTime: req.body.classEndTime,
+      classDays: req.body.classDays,
+      classCapacity: req.body.classCapacity,
+      classLocation: req.body.classLocation,
+      classDescription: req.body.classDescription,
+      classInstructors: id,
+    });
+    newClass.save();
+    console.log('Class Created');
+    console.log(newClass);
+    // console.log(instructor.courses);
+    instructor.classes.push(newClass);
+    res.render('instructorHomePage', {
+      user: instructor,
+      practices: null,
+    });
   });
-  newClass.save();
-  console.log('Class Created');
-  res.render('homePageInstructor.html');
 });
 
 //make this so that its deleting the right course and not 355 as the default
@@ -405,11 +419,3 @@ app.get('/:id/roster', redirectLogin, (req, res) => {
 app.get('/:id/coursePageInstructor', redirectLogin, (req, res) => {
   res.render('instructorCoursePage');
 });
-
-// app.get("/searchResults.html", redirectLogin, (req, res) => {
-// 	res.sendFile(__dirname + "/public/HTML/searchResults.html");
-// });
-
-// app.get("/homePageStudent", redirectLogin, (req, res) => {
-// 	res.sendFile(__dirname + "/public/HTML/homePageStudent.html");
-// });
