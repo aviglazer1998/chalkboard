@@ -203,6 +203,14 @@ app.get('/:instructorId/instructorHomePage', redirectLogin, (req, res) => {
 	});
 });
 
+app.get('/deleteCourse', redirectLogin, (req, res) => {
+	const { classId } = req.body;
+	Class.deleteOne({ where: { id: classId } }, (err, course) => {
+		console.log('course deleted');
+		res.redirect('/instructorCoursePage');
+	});
+});
+
 // app.get("/all-students", redirectLogin, (req, res) => {
 app.get('/all-students', redirectLogin, (req, res) => {
 	Student.find({}, (err, students) => {
@@ -417,18 +425,18 @@ app.post('/:id/createCourse', redirectLogin, (req, res) => {
 });
 
 //make this so that its deleting the right course and not 355 as the default
-app.get('/deleteCourse', redirectLogin, (req, res) => {
-	Class.deleteOne({ className: 'csci 355' }, (err) => {
-		if (err) {
-			console.log(err);
-		} else {
-			console.log('Class Deleted');
-		}
+// app.get('/deleteCourse', redirectLogin, (req, res) => {
+// 	Class.deleteOne({ className: 'csci 355' }, (err) => {
+// 		if (err) {
+// 			console.log(err);
+// 		} else {
+// 			console.log('Class Deleted');
+// 		}
 
-		// res.sendFile(__dirname + "/public/HTML/homePageInstructor.html");
-		res.render('homePageInstructor');
-	});
-});
+// 		// res.sendFile(__dirname + "/public/HTML/homePageInstructor.html");
+// 		res.render('homePageInstructor');
+// 	});
+// });
 
 app.get('/:id/roster', redirectLogin, (req, res) => {
 	const { id } = req.params;
