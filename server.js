@@ -130,7 +130,7 @@ app.post('/sign-in', (req, res) => {
                       } else {
                         if (admin) {
                           req.session.userId = req.body.email;
-                          res.redirect('admin-view');
+                          res.redirect(`${admin.id}/admin-view`);
                         } else {
                           console.log('no user');
                           // alert('No User Found')
@@ -157,11 +157,14 @@ app.post('/sign-in', (req, res) => {
   );
 });
 
-app.get('/admin-view', redirectLogin, (req, res) => {
+app.get('/:id/admin-view', redirectLogin, (req, res) => {
   //how to get instructors here too?
   Student.find({}, function (err, studentData) {
-    res.render('admin', {
-      practices: studentData,
+    Instructor.find({}, (err, instructorData) => {
+      res.render('admin', {
+        practices: studentData,
+        instructors: instructorData,
+      });
     });
   });
 });
@@ -224,6 +227,18 @@ app.get('/:instructorId/instructorHomePage', redirectLogin, (req, res) => {
 app.get('/:id/deleteCourse', redirectLogin, (req, res) => {
   const { classId } = req.body;
   Class.deleteOne({ where: { id: classId } }, (err, course) => {
+    Student.find({}, (err, students) => {
+      students.forEach(function (student) {
+        student.classes.forEach(function (course) {
+          if (course._id == classId) {
+            const index = student.classes.indexOf(course);
+            student.classes.splice(index, 1);
+            console.log(student.classes);
+            student.save();
+          }
+        });
+      });
+    });
     console.log('course deleted');
     res.redirect('instructorHomePage');
   });

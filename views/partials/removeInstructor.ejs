@@ -1,8 +1,4 @@
-<% instructors.forEach( function (instructor) {%>
-<%if(course.classInstructors.includes(instructor)){%>
 <input type="button" class="instructor-waitlist" value="Remove" id="teacher" />
-<label for="teacher"
-  ><%= instructor.firstName%> <%= instructor.lastName%>
-</label>
+<label for="teacher"><%= user.firstName%> <%= user.lastName%> </label>
 <br />
-<% }%> <%}) %>
+<!-- need to be able to add more instructors with loop -->

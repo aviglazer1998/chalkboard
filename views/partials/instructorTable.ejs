@@ -1,7 +1,10 @@
-<% practices.forEach(function (practice) { %>
-    <tr>
-      <td><%= practice.type%></td> 
-      <td><%= practice.firstName +' '+ practice.lastName%></td>
-      <td><%= practice.classes.className%></td>
-    </tr>
-  <% }) %>
+<% instructors.forEach(function (student) { %>
+<tr>
+  <td><%= student.type%></td>
+  <td><%= student.firstName +' '+ student.lastName%></td>
+  <td>
+    <% for (var i=0; i< student.classes.length; i++) { %> <%=
+    student.classes[i].className + ' '%> <%}%>
+  </td>
+</tr>
+<% }) %>
