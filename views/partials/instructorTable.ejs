@@ -1,10 +1,11 @@
-<% instructors.forEach(function (student) { %>
+<%= classes[0].classInstructors[0].firstName %>
 <tr>
-  <td><%= student.type%></td>
-  <td><%= student.firstName +' '+ student.lastName%></td>
+  <td><%= classes[0].classInstructors[0].type%></td>
   <td>
-    <% for (var i=0; i< student.classes.length; i++) { %> <%=
-    student.classes[i].className + ' '%> <%}%>
+    <%= classes[0].classInstructors[0].firstName +' '+
+    classes[0].classInstructors[0].lastName%>
+  </td>
+  <td>
+    <% classes.forEach(function(course){%> <%= course.className %> <%}) %>
   </td>
 </tr>
-<% }) %>

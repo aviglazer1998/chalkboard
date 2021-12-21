@@ -160,10 +160,10 @@ app.post('/sign-in', (req, res) => {
 app.get('/:id/admin-view', redirectLogin, (req, res) => {
   //how to get instructors here too?
   Student.find({}, function (err, studentData) {
-    Instructor.find({}, (err, instructorData) => {
+    Class.find({}, (err, classes) => {
       res.render('admin', {
         practices: studentData,
-        instructors: instructorData,
+        classes: classes,
       });
     });
   });
@@ -559,6 +559,18 @@ app.get('/:id/roster', redirectLogin, (req, res) => {
   Instructor.findById(id, (err, instructor) => {
     Class.find({}, (err, classes) => {
       res.render('roster', {
+        user: instructor,
+        classes: classes,
+      });
+    });
+  });
+});
+
+app.get('/:id/lessonComplete', redirectLogin, (req, res) => {
+  const { id } = req.params;
+  Instructor.findById(id, (err, instructor) => {
+    Class.find({}, (err, classes) => {
+      res.render('lessonComplete', {
         user: instructor,
         classes: classes,
       });
