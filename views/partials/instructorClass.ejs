@@ -1,5 +1,5 @@
-<% if(classes){%> <% classes.forEach(function (course) {%> <%
-if(course.classInstructors.includes(user.id)){%>
+<% if(courses){%> <% courses.forEach(function (course) {%>
+
 <div class="class">
   <a href="instructorCoursePage/<%= course.id %>"
     ><div class="container">
@@ -12,7 +12,7 @@ if(course.classInstructors.includes(user.id)){%>
     </div>
   </a>
 </div>
-<% } %> <% })%> <%} else {%>
+<% })%> <%} else {%>
 <div>
   <h3><%= user.firstName %> has no classes</h3>
 </div>

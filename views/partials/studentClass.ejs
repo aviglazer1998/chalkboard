@@ -1,16 +1,17 @@
-<% const i = 0 %> <% if(practices) { practices.forEach(function (practice) { %>
+<% if(practices.length > 0){%> <% practices.forEach(function(practice) {%>
 <div class="class">
-  <a href="studentCoursePage/<%= practice.id %>"
+  <a href="studentCoursePage/<%= practice._id %>"
     ><div class="container">
       <h2><%= practice.className %></h2>
       <div class="class-info">
         <br />
-        <%= practice.classInstructors[i] %>
+        <%= practice.classInstructors[0].firstName %> <%=
+        practice.classInstructors[0].lastName %>
       </div>
     </div></a
   >
 </div>
-<% }) } else{ %>
+<% }) %> <% } else{ %>
 <div>
   <h3><%= user.firstName %> doesn't have any classes right now!</h3>
 </div>

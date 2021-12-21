@@ -18,7 +18,7 @@ const instructorSchema = new Schema({
   //       classDescription: String,
   //     },
   //   ],
-  classes: [],
+  classes: [Object],
 });
 
 const Instructor = mongoose.model('Instructor', instructorSchema);

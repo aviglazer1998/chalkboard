@@ -1,5 +1,4 @@
-<% classes.forEach(function (course) { %>
-<%if(course.classInstructors.includes(user.id)){%>
+<% classes.forEach(function (course){%>
 <div id="class">
   <h2><%= course.className %></h2>
   <table>
@@ -17,4 +16,5 @@
     <%}) %>
   </table>
 </div>
-<% } %> <%}) %>
+
+<%})%>

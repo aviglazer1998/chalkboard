@@ -170,13 +170,18 @@ app.get('/:studentId/studentHomePage', redirectLogin, (req, res) => {
   const { studentId } = req.params;
   Student.findById(studentId, (err, student) => {
     // const classes = student.classes;
-    // console.log(classes);
-    Class.find({ classStudents: student }, function (err, classData) {
-      res.render('studentHomePage', {
-        // practices: null,
-        practices: classData,
-        user: student,
-      });
+    // console.log(student.classes);
+    // Class.find({ classStudents: student }, function (err, classData) {
+    //   res.render('studentHomePage', {
+    //     // practices: null,
+    //     practices: classData,
+    //     user: student,
+    //   });
+    // });
+
+    res.render('studentHomePage', {
+      user: student,
+      practices: student.classes,
     });
   });
 });
@@ -195,21 +200,20 @@ app.get('/:studentId/studentHomePage/:classId', redirectLogin, (req, res) => {
       res.render('studentHomePage', {
         // student: student,
         // course: course,
-        practices: null,
+        practices: student.classes,
         user: student,
       });
     });
-    console.log(course.id);
   });
 });
 
 app.get('/:instructorId/instructorHomePage', redirectLogin, (req, res) => {
   const { instructorId } = req.params;
   Instructor.findById(instructorId, (err, instructor) => {
-    console.log(instructor);
+    // console.log(instructor);
     Classes.find({}, (err, classes) => {
       res.render('instructorHomePage', {
-        classes: classes,
+        courses: classes,
         // practices: classData,
         user: instructor,
       });
@@ -277,7 +281,7 @@ app.post('/:id/search-result-student?', redirectLogin, (req, res) => {
       const array = course.classInstructors;
       const newArray = [];
       array.forEach(function (instructor) {
-        Instructor.findOne({ where: { id: instructor.id } }, (err, i) => {
+        Instructor.findById(instructor.id, (err, i) => {
           // console.log(i);
           newArray.push(i);
           // console.log(newArray);
@@ -321,6 +325,7 @@ app.get('/all-classes', redirectLogin, (req, res) => {
 });
 
 app.get('/:id/logout', redirectLogin, (req, res) => {
+  console.log('TIME TO LOGOUT');
   req.session.destroy(function (err) {
     if (err) {
       console.log(err);
@@ -344,6 +349,71 @@ app.get('/logout', redirectLogin, (req, res) => {
 app.get('/:id/index', redirectLogin, (req, res) => {
   res.sendFile('index');
 });
+
+//take students off the waitlist and add to classlist
+app.post(
+  '/:id/instructorCoursePage/:courseId/:studentId/true',
+  redirectLogin,
+  (req, res) => {
+    console.log('true');
+    const { id } = req.params;
+    const { courseId } = req.params;
+    const { studentId } = req.params;
+
+    Class.findById(courseId, (err, course) => {
+      Student.findById(studentId, (err, student1) => {
+        student1.classes.push(course);
+        student1.save();
+        course.classWaitlist.forEach(function (student2) {
+          if (student1.id == student2._id) {
+            const index = course.classWaitlist.indexOf(student2);
+            course.classWaitlist.splice(index, 1);
+            console.log(course.classWaitlist);
+            course.save();
+          }
+        });
+        Instructor.find({}, (err, instructors) => {
+          res.render('instructorCoursePage', {
+            course: course,
+            instructors: instructors,
+          });
+        });
+      });
+    });
+  }
+);
+
+//remove student from waitlist
+app.post(
+  '/:id/instructorCoursePage/:courseId/:studentId/false',
+  redirectLogin,
+  (req, res) => {
+    //   const box = req.body;
+    console.log('false');
+    const { id } = req.params;
+    const { courseId } = req.params;
+    const { studentId } = req.params;
+
+    Class.findById(courseId, (err, course) => {
+      Student.findById(studentId, (err, student1) => {
+        course.classWaitlist.forEach(function (student2) {
+          if (student1.id == student2._id) {
+            const index = course.classWaitlist.indexOf(student2);
+            course.classWaitlist.splice(index, 1);
+            console.log(course.classWaitlist);
+            course.save();
+          }
+        });
+        Instructor.find({}, (err, instructors) => {
+          res.render('instructorCoursePage', {
+            course: course,
+            instructors: instructors,
+          });
+        });
+      });
+    });
+  }
+);
 
 app.get('/:id/instructorCoursePage/:courseId', redirectLogin, (req, res) => {
   const { courseId } = req.params;
@@ -404,29 +474,34 @@ app.post('/:id/createCourse', redirectLogin, (req, res) => {
   const { id } = req.params;
   console.log(id);
   Instructor.findById(id, (err, instructor) => {
-    const newClass = new Class({
-      className: req.body.className,
-      // classId: ,
-      classStartDate: req.body.classStartDate,
-      classEndDate: req.body.classEndDate,
-      classStartTime: req.body.classStartTime,
-      classEndTime: req.body.classEndTime,
-      classDays: req.body.classDays,
-      classCapacity: req.body.classCapacity,
-      classLocation: req.body.classLocation,
-      classDescription: req.body.classDescription,
-      classInstructors: id,
-    });
-    newClass.save();
-    console.log('Class Created');
-    console.log(newClass);
-    // console.log(instructor.courses);
-    instructor.classes.push(newClass);
-    instructor.save();
-    console.log(instructor);
-    res.render('instructorHomePage', {
-      user: instructor,
-      classes: instructor.classes,
+    Class.find({}, (err, allCourses) => {
+      const newClass = new Class({
+        className: req.body.className,
+        // classId: ,
+        classStartDate: req.body.classStartDate,
+        classEndDate: req.body.classEndDate,
+        classStartTime: req.body.classStartTime,
+        classEndTime: req.body.classEndTime,
+        classDays: req.body.classDays,
+        classCapacity: req.body.classCapacity,
+        classLocation: req.body.classLocation,
+        classDescription: req.body.classDescription,
+        classInstructors: instructor,
+      });
+      newClass.save();
+      var classes = [];
+      allCourses.forEach(function (course) {
+        course.classInstructors.forEach(function (instructor2) {
+          if (instructor == instructor2) {
+            classes.push(instructor2);
+          }
+        });
+      });
+      console.log(classes);
+      res.render('instructorHomePage', {
+        user: instructor,
+        courses: classes,
+      });
     });
   });
 });

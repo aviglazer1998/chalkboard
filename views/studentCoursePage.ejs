@@ -35,7 +35,10 @@
         </div>
       </div>
       <h1><%= course.className %></h1>
-      <p><%= course.ClassInstructor %></p>
+      <p>
+        <%= course.classInstructors[0].firstName %> <%=
+        course.classInstructors[0].lastName %>
+      </p>
     </div>
     <hr />
     <div class="main">

@@ -96,6 +96,7 @@ a {
   color: black;
 }
 
+input[type='submit'],
 input[type='button'] {
   background-color: #0476aa;
   color: white;
@@ -123,6 +124,10 @@ input[type='button']:hover {
 }
 .x {
   margin-right: 20px;
+}
+
+.waitlist-buttons {
+  display: flex;
 }
 
 @media screen and (max-width: 700px) {

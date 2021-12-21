@@ -1,11 +1,33 @@
-<% if(course.classWaitlist.length > 0) { %> 
-    <% course.classWaitlist.forEach(function (student){%>
-<input type="button" class="student-waitlist check" value="&#10003" id="student" />
-				<input type="button" class="student-waitlist x" value="&times" id="student" />
-				<label for="student"><%= student %></label>
-				<br />
-  <%  }) %> 
-<%} else{%>
+<% if(course.classWaitlist.length > 0) { %> <%
+course.classWaitlist.forEach(function (student){%>
+<div class="waitlist-buttons">
+  <form
+    action="../instructorCoursePage/<%= course.id%>/<%= student._id%>/true"
+    method="POST"
+  >
+    <input
+      type="submit"
+      class="student-waitlist check"
+      value="add"
+      id="studenty"
+    />
+  </form>
+  <form
+    action="../instructorCoursePage/<%= course.id%>/<%= student._id%>/false"
+    method="POST"
+  >
+    <input
+      type="submit"
+      class="student-waitlist x"
+      value="remove"
+      id="studentx"
+    />
+  </form>
+  <label for="student"><%= student.firstName%> <%= student.lastName%> </label>
+  <br />
+</div>
+
+<% }) %> <%} else{%>
 <div>
   <p>Waitlist is empty</p>
 </div>

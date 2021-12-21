@@ -1,6 +1,5 @@
 <!-- need to put a for each so that we have all the instructors that are teach this class -->
-<% instructors.forEach( function (instructor) {%> <%
-if(course.classInstructors.includes(instructor.id)){%>
+<% course.classInstructors.forEach(function (instructor){%>
 <div class="instructor-btn">
   <form action="studentHomePage/<%= course.id%>" method="PUT">
     <input
@@ -14,4 +13,5 @@ if(course.classInstructors.includes(instructor.id)){%>
     </label>
   </form>
 </div>
-<% }%> <%}) %>
+
+<%}) %>
