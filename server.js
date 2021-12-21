@@ -270,7 +270,7 @@ app.post('/:id/search-result?', redirectLogin, (req, res) => {
       const array = course.classInstructors;
       const newArray = [];
       array.forEach(function (instructor) {
-        Instructor.findOne({ where: { id: instructor.id } }, (err, i) => {
+        Instructor.findById(id, (err, i) => {
           // console.log(i);
           newArray.push(i);
           // console.log(newArray);
@@ -304,7 +304,7 @@ app.post('/:id/search-result-student?', redirectLogin, (req, res) => {
       const array = course.classInstructors;
       const newArray = [];
       array.forEach(function (instructor) {
-        Instructor.findById(instructor.id, (err, i) => {
+        Instructor.findById(id, (err, i) => {
           // console.log(i);
           newArray.push(i);
           // console.log(newArray);
@@ -344,6 +344,18 @@ app.get('/all-classes', redirectLogin, (req, res) => {
     // 	practices: studentData,
     // 	// practices: instructorData
     // });
+  });
+});
+
+app.get('/:id/logout/:otherId', redirectLogin, (req, res) => {
+  console.log('TIME TO LOGOUT');
+  req.session.destroy(function (err) {
+    if (err) {
+      console.log(err);
+    } else {
+      //   res.redirect(__dirname + '/public/HTML/index.html');
+      res.redirect('index');
+    }
   });
 });
 
