@@ -221,12 +221,12 @@ app.get('/:instructorId/instructorHomePage', redirectLogin, (req, res) => {
   });
 });
 
-app.get('/deleteCourse', redirectLogin, (req, res) => {
-	const { classId } = req.body;
-	Class.deleteOne({ where: { id: classId } }, (err, course) => {
-		console.log('course deleted');
-		res.redirect('/instructorCoursePage');
-	});
+app.get('/:id/deleteCourse', redirectLogin, (req, res) => {
+  const { classId } = req.body;
+  Class.deleteOne({ where: { id: classId } }, (err, course) => {
+    console.log('course deleted');
+    res.redirect('instructorHomePage');
+  });
 });
 
 // app.get("/all-students", redirectLogin, (req, res) => {
@@ -381,9 +381,12 @@ app.post(
           }
         });
         Instructor.find({}, (err, instructors) => {
-          res.render('instructorCoursePage', {
-            course: course,
-            instructors: instructors,
+          Instructor.findById(id, (err, instructor) => {
+            res.render('instructorCoursePage', {
+              course: course,
+              instructors: instructors,
+              user: instructor,
+            });
           });
         });
       });
@@ -413,25 +416,35 @@ app.post(
           }
         });
         Instructor.find({}, (err, instructors) => {
-          res.render('instructorCoursePage', {
-            course: course,
-            instructors: instructors,
+          Instructor.findById(id, (err, instructor) => {
+            res.render('instructorCoursePage', {
+              course: course,
+              instructors: instructors,
+              user: instructor,
+            });
           });
         });
       });
     });
   }
 );
+//   }
+// );
 
 app.get('/:id/instructorCoursePage/:courseId', redirectLogin, (req, res) => {
+  const { id } = req.params;
+
   const { courseId } = req.params;
   console.log(courseId);
 
   Class.findById(courseId, (err, course) => {
     Instructor.find({}, (err, instructors) => {
-      res.render('instructorCoursePage', {
-        course: course,
-        instructors: instructors,
+      Instructor.findById(id, (err, instructor) => {
+        res.render('instructorCoursePage', {
+          course: course,
+          instructors: instructors,
+          user: instructor,
+        });
       });
     });
     // console.log(course);
@@ -513,7 +526,6 @@ app.post('/:id/createCourse', redirectLogin, (req, res) => {
     });
   });
 });
-
 
 app.get('/:id/roster', redirectLogin, (req, res) => {
   const { id } = req.params;
