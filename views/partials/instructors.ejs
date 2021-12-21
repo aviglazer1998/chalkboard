@@ -1,5 +1,12 @@
 <!-- need to put a for each so that we have all the instructors that are teach this class -->
-<% course.classInstructors.forEach(function (instructor){%>
+<script>
+  function myFunction() {
+    alert('You have joined the waitlist!');
+  }
+</script>
+<% course.classInstructors.forEach(function (instructor){%> <%
+instructors.forEach( function (instructor) {%> <%
+if(course.classInstructors.includes(instructor.id)){%>
 <div class="instructor-btn">
   <form action="studentHomePage/<%= course.id%>" method="PUT">
     <input
@@ -7,6 +14,7 @@
       class="instructor-waitlist"
       value="Join Waitlist"
       id="teacher"
+      onclick="myFunction()"
     />
     <label for="teacher"
       ><%= instructor.firstName %> <%= instructor.lastName %>
